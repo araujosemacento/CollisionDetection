@@ -5,6 +5,8 @@ order: 2
 sketch: null
 ---
 
-import TableOfContents from '$lib/components/TableOfContents.svelte';
+<script>
+	import TableOfContents from '$lib/components/TableOfContents.svelte';
+</script>
 
 <TableOfContents />

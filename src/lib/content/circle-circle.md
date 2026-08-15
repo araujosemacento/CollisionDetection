@@ -18,7 +18,7 @@ let distY = c1y - c2y;
 let distance = Math.sqrt((distX * distX) + (distY * distY));
 ```
 
-Para verificar se há colisão, testamos se a **distância entre os centros é menor ou igual à soma dos dois raios** ($r_1 + r_2$):
+Para verificar se há colisão, testamos se a **distância entre os centros é menor ou igual à soma dos dois raios** (`r1 + r2`):
 
 ```javascript
 if (distance <= c1r + c2r) {

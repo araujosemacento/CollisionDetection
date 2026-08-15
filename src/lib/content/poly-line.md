@@ -8,7 +8,7 @@ caption: "Mova a linha com o mouse para atingir o polígono regular de 16 lados!
 
 # POLÍGONO / LINHA
 
-Verificamos se uma linha $(x_1, y_1) \rightarrow (x_2, y_2)$ cruza qualquer uma das arestas do polígono utilizando a função [Linha/Linha](/line-line):
+Verificamos se uma linha `(x1, y1) -> (x2, y2)` cruza qualquer uma das arestas do polígono utilizando a função [Linha/Linha](/line-line):
 
 ```javascript
 for (let current = 0; current < vertices.length; current++) {

@@ -14,17 +14,19 @@
 	<title>{meta.title ? `${meta.title} - Detecção de Colisão` : 'Detecção de Colisão'}</title>
 </svelte:head>
 
-<Header {slug} />
+{#key slug}
+	<Header {slug} />
 
-{#if meta.sketch}
-	<CanvasSketch sketchName={meta.sketch} caption={meta.caption || ''} />
-{/if}
+	{#if meta.sketch}
+		<CanvasSketch sketchName={meta.sketch} caption={meta.caption || ''} />
+	{/if}
 
-<main class="chapter-body">
-	<Content />
-</main>
+	<main class="chapter-body">
+		<Content />
+	</main>
 
-<Footer {slug} />
+	<Footer {slug} />
+{/key}
 
 <style>
 	.chapter-body {

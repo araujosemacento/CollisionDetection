@@ -8,11 +8,13 @@ caption: "Use o mouse para posicionar o ponto sobre o segmento de reta!"
 
 # LINHA / PONTO
 
-Para testar se um ponto está sobre um segmento de reta definido por $(x_1, y_1)$ e $(x_2, y_2)$, utilizamos a propriedade da soma das distâncias:
+Para testar se um ponto está sobre um segmento de reta definido por `(x1, y1)` e `(x2, y2)`, utilizamos a propriedade da soma das distâncias:
 
-Se o ponto $(px, py)$ está na linha, a **distância do ponto até o início da linha** ($d_1$) mais a **distância do ponto até o fim da linha** ($d_2$) deve ser exatamente igual ao **comprimento total da linha** ($lineLen$).
+Se o ponto `(px, py)` está na linha, a **distância do ponto até o início da linha** (`d1`) mais a **distância do ponto até o fim da linha** (`d2`) deve ser exatamente igual ao **comprimento total da linha** (`lineLen`).
 
-$$d_1 + d_2 = lineLen$$
+```text
+d1 + d2 = lineLen
+```
 
 Como os números de ponto flutuante possuem imprecisão de arredondamento, adicionamos uma pequena margem de tolerância (*buffer*):
 

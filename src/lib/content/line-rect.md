@@ -10,10 +10,10 @@ caption: "Mova a linha com o mouse para atingir o retângulo!"
 
 Como verificar se uma linha colide com um retângulo? Basta reutilizar a função [Linha/Linha](/line-line) que acabamos de aprender e testar a linha contra cada um dos **quatro lados do retângulo**:
 
-1. Lado esquerdo: $(rx, ry)$ até $(rx, ry+rh)$
-2. Lado direito: $(rx+rw, ry)$ até $(rx+rw, ry+rh)$
-3. Lado superior: $(rx, ry)$ até $(rx+rw, ry)$
-4. Lado inferior: $(rx, ry+rh)$ até $(rx+rw, ry+rh)$
+1. Lado esquerdo: `(rx, ry)` até `(rx, ry + rh)`
+2. Lado direito: `(rx + rw, ry)` até `(rx + rw, ry + rh)`
+3. Lado superior: `(rx, ry)` até `(rx + rw, ry)`
+4. Lado inferior: `(rx, ry + rh)` até `(rx + rw, ry + rh)`
 
 Se a linha cruzar **qualquer um** dos quatro lados, há colisão!
 

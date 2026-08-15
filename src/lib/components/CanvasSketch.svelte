@@ -1,33 +1,55 @@
 <script>
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 
 	let { sketchName = '', caption = '' } = $props();
 	let container = $state(null);
 	let p5Instance = null;
 	let errorMsg = $state('');
 
-	onMount(async () => {
-		if (!sketchName || !container) return;
-		try {
-			const p5Module = await import('p5');
-			const p5 = p5Module.default;
-			const sketches = await import('$lib/sketches/index.js');
-			const sketchFn = sketches[sketchName];
-
-			if (sketchFn) {
-				p5Instance = new p5(sketchFn(container), container);
-			}
-		} catch (err) {
-			console.error('Erro ao carregar o sketch p5.js:', err);
-			errorMsg = 'Erro ao carregar a demonstração interativa.';
-		}
-	});
-
-	onDestroy(() => {
+	function destroySketch() {
 		if (p5Instance) {
 			p5Instance.remove();
 			p5Instance = null;
 		}
+	}
+
+	$effect(() => {
+		let active = true;
+		const currentSketch = sketchName;
+		const currentContainer = container;
+
+		if (!currentSketch || !currentContainer) return;
+
+		destroySketch();
+
+		async function loadSketch() {
+			try {
+				const p5Module = await import('p5');
+				const p5 = p5Module.default;
+				const sketches = await import('$lib/sketches/index.js');
+				const sketchFn = sketches[currentSketch];
+
+				if (sketchFn && active && currentContainer) {
+					// Clear any residual elements in container before mounting
+					currentContainer.innerHTML = '';
+					p5Instance = new p5(sketchFn(currentContainer), currentContainer);
+				}
+			} catch (err) {
+				console.error('Erro ao carregar o sketch p5.js:', err);
+				if (active) errorMsg = 'Erro ao carregar a demonstração interativa.';
+			}
+		}
+
+		loadSketch();
+
+		return () => {
+			active = false;
+			destroySketch();
+		};
+	});
+
+	onDestroy(() => {
+		destroySketch();
 	});
 </script>
 

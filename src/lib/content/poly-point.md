@@ -12,8 +12,8 @@ Para testar se um ponto está dentro de um polígono com qualquer número de vé
 
 Traçamos um raio horizontal imaginário partindo do ponto e indo até o infinito à direita. Contamos quantas vezes esse raio cruza as arestas do polígono:
 
-- Se cruzar um número **ímpar** de vezes $\rightarrow$ o ponto está **DENTRO**.
-- Se cruzar um número **par** de vezes $\rightarrow$ o ponto está **FORA**.
+- Se cruzar um número **ímpar** de vezes &rarr; o ponto está **DENTRO**.
+- Se cruzar um número **par** de vezes &rarr; o ponto está **FORA**.
 
 ```javascript
 if (((vc.y >= py && vn.y < py) || (vc.y < py && vn.y >= py)) &&

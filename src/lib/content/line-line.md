@@ -10,16 +10,19 @@ caption: "Use o mouse para cruzar as duas linhas!"
 
 Com este algoritmo você pode criar mecânicas incríveis de combate de espadas ou raycasting!
 
-Para verificar se dois segmentos de reta se cruzam, calculamos os parâmetros de interseção $u_A$ e $u_B$:
+Para verificar se dois segmentos de reta se cruzam, calculamos os parâmetros de interseção `uA` e `uB`:
 
-$$u_A = \frac{(x_4-x_3)(y_1-y_3) - (y_4-y_3)(x_1-x_3)}{(y_4-y_3)(x_2-x_1) - (x_4-x_3)(y_2-y_1)}$$
+```javascript
+uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+uB = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+```
 
-$$u_B = \frac{(x_2-x_1)(y_1-y_3) - (y_2-y_1)(x_1-x_3)}{(y_4-y_3)(x_2-x_1) - (x_4-x_3)(y_2-y_1)}$$
+Se ambos `uA` e `uB` estiverem no intervalo entre `0` e `1`, as linhas se cruzam! O ponto exato do impacto pode ser obtido por:
 
-Se ambos $u_A$ e $u_B$ estiverem no intervalo de $0$ a $1$, as linhas se cruzam! O ponto exato do impacto pode ser obtido por:
-
-$$\text{intersectionX} = x_1 + (u_A \cdot (x_2 - x_1))$$
-$$\text{intersectionY} = y_1 + (u_A \cdot (y_2 - y_1))$$
+```javascript
+intersectionX = x1 + (uA * (x2 - x1));
+intersectionY = y1 + (uA * (y2 - y1));
+```
 
 ### JavaScript (p5.js)
 ```javascript

@@ -10,15 +10,17 @@ caption: "Mova o mouse (ponto) para dentro do círculo para testar a colisão!"
 
 A colisão [Ponto/Ponto](/point-point) foi extremamente fácil, mas a partir de agora precisaremos de matemática básica para verificar se os objetos estão se tocando. Testar se um ponto está dentro de um círculo exige relembrar o **Teorema de Pitágoras**:
 
-$$a^2 + b^2 = c^2$$
+```text
+a² + b² = c²
+```
 
-Podemos calcular o comprimento da hipotenusa $c$ dados os dois catetos $a$ e $b$:
+Podemos calcular o comprimento da hipotenusa **c** dados os dois catetos **a** e **b**:
 
 ```javascript
 c = Math.sqrt((a * a) + (b * b));
 ```
 
-Por que precisamos disso? O Teorema de Pitágoras nos dá a **distância entre dois pontos no espaço 2D**! Nesse contexto, $a$ e $b$ são as distâncias horizontal ($\Delta X$) e vertical ($\Delta Y$) entre o ponto e o centro do círculo.
+Por que precisamos disso? O Teorema de Pitágoras nos dá a **distância entre dois pontos no espaço 2D**! Nesse contexto, **a** e **b** são as distâncias horizontal e vertical entre o ponto e o centro do círculo.
 
 Calculamos as distâncias X e Y:
 
@@ -33,11 +35,11 @@ E obtemos a distância euclidiana total:
 let distance = Math.sqrt((distX * distX) + (distY * distY));
 ```
 
-Se o ponto está em $(10,10)$ e o centro do círculo em $(40,50)$, a distância será $50$. (Mesmo se as diferenças forem negativas, a multiplicação por si mesmas torna o resultado positivo).
+Se o ponto está em `(10,10)` e o centro do círculo em `(40,50)`, a distância será `50`. (Mesmo se as diferenças forem negativas, a multiplicação por si mesmas torna o resultado positivo).
 
 ## COMO TESTAR A COLISÃO?
 
-Se a distância entre o ponto e o centro do círculo for **menor ou igual ao raio ($r$) do círculo**, significa que o ponto está dentro do círculo!
+Se a distância entre o ponto e o centro do círculo for **menor ou igual ao raio (r) do círculo**, significa que o ponto está dentro do círculo!
 
 ```javascript
 if (distance <= r) {
