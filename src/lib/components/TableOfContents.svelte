@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import { chapters } from '$lib/utils/navigation.js';
 
 	const sections = [
@@ -41,7 +42,7 @@
 			<ol>
 				{#each section.items as chapter}
 					<li>
-						<a href="/{chapter.slug}">
+						<a href="{base}/{chapter.slug}">
 							{chapter.title}
 						</a>
 					</li>

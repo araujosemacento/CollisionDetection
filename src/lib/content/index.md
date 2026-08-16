@@ -18,7 +18,7 @@ Este livro explica os algoritmos por trás dessas colisões utilizando formas ge
 <strong>ATUALIZAÇÃO!</strong> Este site foi atualizado e traduzido para o Português (PT-BR), com suporte a telas modernas, dispositivos móveis e renderização interativa em <code>p5.js</code>.
 </div>
 
-Pronto para começar? Vá direto para o [Sumário do Livro](/table_of_contents)...
+Pronto para começar? Vá direto para o [Sumário do Livro](table_of_contents)...
 
 ## O QUE É COBERTO AQUI?
 

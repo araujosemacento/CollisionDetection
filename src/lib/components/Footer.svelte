@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import { getChapterInfo } from '$lib/utils/navigation.js';
 
 	let { slug = 'index' } = $props();
@@ -6,14 +7,14 @@
 </script>
 
 {#if slug !== 'thanks' && info?.next}
-	<a href="/{info.next.slug}" class="next-page-link">
+	<a href="{base}/{info.next.slug}" class="next-page-link">
 		<p class="next-page">PRÓXIMO: {info.next.title.toUpperCase()}</p>
 	</a>
 {/if}
 
 <footer>
 	<p>
-		[ <a href="/">Início</a> | <a href="/table_of_contents">Sumário</a> |
+		[ <a href="{base}/">Início</a> | <a href="{base}/table_of_contents">Sumário</a> |
 		<a href="https://github.com/jeffThompson/CollisionDetection" target="_blank" rel="noreferrer">GitHub</a> ]
 	</p>
 	<p class="license">

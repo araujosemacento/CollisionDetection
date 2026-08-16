@@ -12,7 +12,7 @@ caption: "Use o mouse para mover o círculo menor e colidir com o círculo maior
 
 # CÍRCULO / CÍRCULO
 
-Raramente os objetos em jogos ocupam apenas um ponto no espaço. Em seguida, podemos utilizar a mesma fórmula da distância do Teorema de Pitágoras vista no capítulo [Ponto/Círculo](/point-circle) para verificar se dois círculos estão se tocando.
+Raramente os objetos em jogos ocupam apenas um ponto no espaço. Em seguida, podemos utilizar a mesma fórmula da distância do Teorema de Pitágoras vista no capítulo [Ponto/Círculo](point-circle) para verificar se dois círculos estão se tocando.
 
 Primeiro, calculamos a distância entre os centros dos dois círculos:
 

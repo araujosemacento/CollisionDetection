@@ -14,8 +14,8 @@ caption: "Mova o polígono irregular com o mouse para colidir com o pentágono c
 
 Testar se dois polígonos quaisquer estão colidindo é o ápice dos testes com polígonos:
 
-1. Testamos todas as arestas do Polígono 1 contra o Polígono 2 usando [Polígono/Linha](/poly-line).
-2. Testamos se o Polígono 2 está inteiramente contido dentro do Polígono 1 usando [Polígono/Ponto](/poly-point).
+1. Testamos todas as arestas do Polígono 1 contra o Polígono 2 usando [Polígono/Linha](poly-line).
+2. Testamos se o Polígono 2 está inteiramente contido dentro do Polígono 1 usando [Polígono/Ponto](poly-point).
 
 <CodeTabs>
 

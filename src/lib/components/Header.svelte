@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import { getChapterInfo } from '$lib/utils/navigation.js';
 
 	let { slug = 'index' } = $props();
@@ -37,7 +38,7 @@
 			<div class="nav-prev">
 				{#if info?.prev}
 					<a
-						href="/{info.prev.slug}"
+						href="{base}/{info.prev.slug}"
 						onmouseenter={() => handlePrevHover(true)}
 						onmouseleave={() => handlePrevHover(false)}
 						aria-label="Capítulo anterior"
@@ -51,10 +52,10 @@
 
 			<div class="nav-title">
 				{#if slug === 'table_of_contents'}
-					<a href="/">Detecção de Colisão</a>
+					<a href="{base}/">Detecção de Colisão</a>
 				{:else}
 					<a
-						href="/table_of_contents"
+						href="{base}/table_of_contents"
 						onmouseenter={() => handleTitleHover(true)}
 						onmouseleave={() => handleTitleHover(false)}
 					>
@@ -66,7 +67,7 @@
 			<div class="nav-next">
 				{#if info?.next}
 					<a
-						href="/{info.next.slug}"
+						href="{base}/{info.next.slug}"
 						onmouseenter={() => handleNextHover(true)}
 						onmouseleave={() => handleNextHover(false)}
 						aria-label="Próximo capítulo"

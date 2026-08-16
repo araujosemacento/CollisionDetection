@@ -12,7 +12,7 @@ caption: "Mova o círculo com o mouse para atingir o polígono!"
 
 # POLÍGONO / CÍRCULO
 
-Testamos a colisão de um círculo contra um polígono verificando a colisão da circunferência contra cada uma das arestas usando a função [Linha/Círculo](/line-circle):
+Testamos a colisão de um círculo contra um polígono verificando a colisão da circunferência contra cada uma das arestas usando a função [Linha/Círculo](line-circle):
 
 <CodeTabs>
 

@@ -12,7 +12,7 @@ caption: "Mova o retângulo menor com o mouse para colidir com o retângulo maio
 
 # RETÂNGULO / RETÂNGULO
 
-Assim como no capítulo [Ponto/Retângulo](/point-rect), para verificar a colisão entre dois retângulos alinhados aos eixos (AABB - *Axis-Aligned Bounding Box*), comparamos as bordas dos dois objetos.
+Assim como no capítulo [Ponto/Retângulo](point-rect), para verificar a colisão entre dois retângulos alinhados aos eixos (AABB - *Axis-Aligned Bounding Box*), comparamos as bordas dos dois objetos.
 
 A colisão ocorre se todas as quatro condições de sobreposição das bordas forem verdadeiras:
 

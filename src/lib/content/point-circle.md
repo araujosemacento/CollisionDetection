@@ -12,7 +12,7 @@ caption: "Mova o mouse (ponto) para dentro do círculo para testar a colisão!"
 
 # PONTO / CÍRCULO
 
-A colisão [Ponto/Ponto](/point-point) foi extremamente fácil, mas a partir de agora precisaremos de matemática básica para verificar se os objetos estão se tocando. Testar se um ponto está dentro de um círculo exige relembrar o **Teorema de Pitágoras**:
+A colisão [Ponto/Ponto](point-point) foi extremamente fácil, mas a partir de agora precisaremos de matemática básica para verificar se os objetos estão se tocando. Testar se um ponto está dentro de um círculo exige relembrar o **Teorema de Pitágoras**:
 
 ```text
 a² + b² = c²

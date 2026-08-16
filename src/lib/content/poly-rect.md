@@ -14,8 +14,8 @@ caption: "Mova o retângulo com o mouse para atingir o polígono!"
 
 Para testar se um retângulo colide com um polígono:
 
-1. Testamos todas as arestas do polígono contra os 4 lados do retângulo usando a função [Linha/Retângulo](/line-rect).
-2. Opcionalmente, testamos se o retângulo está totalmente contido dentro do polígono usando [Polígono/Ponto](/poly-point).
+1. Testamos todas as arestas do polígono contra os 4 lados do retângulo usando a função [Linha/Retângulo](line-rect).
+2. Opcionalmente, testamos se o retângulo está totalmente contido dentro do polígono usando [Polígono/Ponto](poly-point).
 
 <CodeTabs>
 
