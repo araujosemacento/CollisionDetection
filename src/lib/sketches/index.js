@@ -316,7 +316,6 @@ export const LinePoint = (container) => (p) => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
 		p.noCursor();
-		p.strokeWeight(15);
 		x1 = 100;
 		y1 = p.height - 100;
 		x2 = p.width - 100;
@@ -365,6 +364,20 @@ export const LineCircle = (container) => (p) => {
 		p.stroke(hit ? [255, 150, 0, 150] : [0, 150, 255, 150]);
 		p.line(x1, y1, x2, y2);
 
+		// desenha o ponto de interseção/projeção mais próximo se estiver no segmento
+		const len = Math.hypot(x1 - x2, y1 - y2);
+		if (len !== 0) {
+			const dot = (((cx - x1) * (x2 - x1)) + ((cy - y1) * (y2 - y1))) / Math.pow(len, 2);
+			const closestX = x1 + dot * (x2 - x1);
+			const closestY = y1 + dot * (y2 - y1);
+			const onSegment = col.linePoint(x1, y1, x2, y2, closestX, closestY);
+			if (onSegment) {
+				p.fill(255, 0, 0);
+				p.noStroke();
+				p.ellipse(closestX, closestY, 20, 20);
+			}
+		}
+
 		p.fill(0, 150);
 		p.noStroke();
 		p.ellipse(cx, cy, r * 2, r * 2);
@@ -380,7 +393,6 @@ export const LineLine = (container) => (p) => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
 		p.noCursor();
-		p.strokeWeight(15);
 		x3 = 100;
 		y3 = p.height - 100;
 		x4 = p.width - 100;
@@ -427,7 +439,6 @@ export const LineRect = (container) => (p) => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
 		p.noCursor();
-		p.strokeWeight(5);
 		sx = p.width / 2 - sw / 2;
 		sy = p.height / 2 - sh / 2;
 	};
@@ -442,6 +453,30 @@ export const LineRect = (container) => (p) => {
 		p.noStroke();
 		p.fill(hit ? [255, 150, 0] : [0, 150, 255]);
 		p.rect(sx, sy, sw, sh);
+
+		// desenha o ponto vermelho para cada lado atingido do retângulo
+		const edges = [
+			{ x3: sx, y3: sy, x4: sx, y4: sy + sh },
+			{ x3: sx + sw, y3: sy, x4: sx + sw, y4: sy + sh },
+			{ x3: sx, y3: sy, x4: sx + sw, y4: sy },
+			{ x3: sx, y3: sy + sh, x4: sx + sw, y4: sy + sh }
+		];
+
+		for (const edge of edges) {
+			const { x3, y3, x4, y4 } = edge;
+			const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+			if (denom !== 0) {
+				const uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom;
+				const uB = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denom;
+				if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
+					const intersectionX = x1 + uA * (x2 - x1);
+					const intersectionY = y1 + uA * (y2 - y1);
+					p.fill(255, 0, 0);
+					p.noStroke();
+					p.ellipse(intersectionX, intersectionY, 20, 20);
+				}
+			}
+		}
 
 		p.strokeWeight(5);
 		p.stroke(0, 150);
@@ -516,7 +551,31 @@ export const PolyCircle = (container) => (p) => {
 		}
 		p.endShape(p.CLOSE);
 
+		// desenha o ponto vermelho para a projeção mais próxima em cada aresta do polígono se estiver no segmento
+		let next = 0;
+		for (let current = 0; current < vertices.length; current++) {
+			next = current + 1;
+			if (next === vertices.length) next = 0;
+
+			const vc = vertices[current];
+			const vn = vertices[next];
+
+			const len = Math.hypot(vc.x - vn.x, vc.y - vn.y);
+			if (len !== 0) {
+				const dot = (((cx - vc.x) * (vn.x - vc.x)) + ((cy - vc.y) * (vn.y - vc.y))) / Math.pow(len, 2);
+				const closestX = vc.x + dot * (vn.x - vc.x);
+				const closestY = vc.y + dot * (vn.y - vc.y);
+				const onSegment = col.linePoint(vc.x, vc.y, vn.x, vn.y, closestX, closestY);
+				if (onSegment) {
+					p.fill(255, 0, 0);
+					p.noStroke();
+					p.ellipse(closestX, closestY, 20, 20);
+				}
+			}
+		}
+
 		p.fill(0, 150);
+		p.noStroke();
 		p.ellipse(cx, cy, r * 2, r * 2);
 	};
 };
