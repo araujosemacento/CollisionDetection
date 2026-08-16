@@ -26,11 +26,11 @@ Acesse a página inicial do repositório no GitHub (`https://github.com/araujose
 
 Quando o link do seu site for compartilhado no WhatsApp, Twitter/X, LinkedIn, Discord ou Facebook, os buscadores e redes usarão a imagem especificada no metadado `og:image`.
 
-- [ ] **Criar a Imagem de Capa:**
+- [X] **Criar a Imagem de Capa:**
   - **Dimensões recomendadas:** 1200 x 630 pixels (proporção 1.91:1).
   - **Formato:** PNG ou JPG otimizado.
   - **Conteúdo sugerido:** Título "Detecção de Colisão 2D", capturas visuais dos demonstrativos gráficos (ex: colisão círculo/retângulo em p5.js) e logos das linguagens (JS, Python, Java).
-- [ ] **Salvar no Projeto:**
+- [X] **Salvar no Projeto:**
   - Salvar o arquivo no caminho `static/og-cover.png`.
 
 ---
@@ -39,7 +39,7 @@ Quando o link do seu site for compartilhado no WhatsApp, Twitter/X, LinkedIn, Di
 
 Para acelerar a indexação de todos os 30 capítulos no Google e Bing:
 
-- [ ] **Google Search Console:**
+- [X] **Google Search Console:**
   1. Acesse [Google Search Console](https://search.google.com/search-console).
   2. Adicione a propriedade do tipo URL: `https://araujosemacento.github.io/collision_detection/`.
   3. Verifique a propriedade via meta tag HTML ou arquivo HTML na pasta `static/`.
