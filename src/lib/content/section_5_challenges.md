@@ -7,6 +7,8 @@ sketch: null
 
 # SEÇÃO 5: DESAFIOS
 
+![Ilustração de Desafio](images/challenge.jpg)
+
 Desafios sobre triângulos:
 
 1. **Coordenadas Baricêntricas**: O método da soma de áreas funciona bem, mas outro método popular para testes em triângulos são as *Coordenadas Baricêntricas*. Pesquise sobre esse algoritmo e tente implementá-lo.

@@ -26,6 +26,8 @@ c = Math.sqrt((a * a) + (b * b));
 
 Por que precisamos disso? O Teorema de Pitágoras nos dá a **distância entre dois pontos no espaço 2D**! Nesse contexto, **a** e **b** são as distâncias horizontal e vertical entre o ponto e o centro do círculo.
 
+![Triângulo formado entre o ponto e o centro do círculo](images/point-circle.jpg)
+
 Calculamos as distâncias X e Y:
 
 ```javascript

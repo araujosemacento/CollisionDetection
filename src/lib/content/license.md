@@ -7,6 +7,8 @@ sketch: null
 
 # LICENÇA
 
+![Licença Creative Commons - Compartilhar e Adaptar](images/license.jpg)
+
 Todo o conteúdo deste livro, incluindo os exemplos de código e o texto explicativo, é disponibilizado sob a licença **Creative Commons Attribution, Non-Commercial, Share-Alike (CC BY-NC-SA 4.0)**.
 
 Isso significa que:

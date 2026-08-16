@@ -7,6 +7,8 @@ sketch: null
 
 # SEÇÃO 4: DESAFIOS
 
+![Ilustração de Desafio](images/challenge.jpg)
+
 Desafios sobre polígonos:
 
 1. **Polígonos Dinâmicos**: Você consegue criar uma função que gera polígonos regulares aleatórios com N lados e testa colisões entre eles?

@@ -21,6 +21,8 @@ A colisão ocorre se todas as quatro condições de sobreposição das bordas fo
 3. A borda inferior do retângulo 1 passa da borda superior do retângulo 2 (`r1y + r1h >= r2y`)
 4. A borda superior do retângulo 1 está antes da borda inferior do retângulo 2 (`r1y <= r2y + r2h`)
 
+![Teste de sobreposição entre dois retângulos](images/rect-rect.jpg)
+
 <CodeTabs>
 
 ```javascript
@@ -67,3 +69,5 @@ def rect_rect(r1x, r1y, r1w, r1h, r2x, r2y, r2w, r2h):
 ## AABB (AXIS-ALIGNED BOUNDING BOX)
 
 Este algoritmo pressupõe que os retângulos **não estão rotacionados**. Essa é a base do sistema de colisão de quase todos os jogos 2D clássicos como *Super Mario*, *Platformers* e *Top-Down Shooters*!
+
+![Exemplo de Bounding Box retangular em objeto complexo](images/bounding-box.jpg)

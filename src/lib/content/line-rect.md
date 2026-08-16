@@ -21,6 +21,8 @@ Como verificar se uma linha colide com um retângulo? Basta reutilizar a funçã
 
 Se a linha cruzar **qualquer um** dos quatro lados, há colisão!
 
+![Divisão de um retângulo em quatro linhas](images/line-rect.jpg)
+
 <CodeTabs>
 
 ```javascript
@@ -68,3 +70,9 @@ def line_rect(x1, y1, x2, y2, rx, ry, rw, rh):
 ```
 
 </CodeTabs>
+
+## LINE OF SIGHT (CAMPOS DE VISÃO)
+
+Este algoritmo também é frequentemente utilizado para calcular **Line of Sight** (linha de visão). Traçar uma linha entre o jogador e um inimigo e verificar se ela colide com obstáculos retangulares determina se o inimigo consegue ver o jogador ou se a visão está bloqueada.
+
+![Exemplo de Linha de Visão bloqueada por obstáculo](images/line-of-sight.jpg)

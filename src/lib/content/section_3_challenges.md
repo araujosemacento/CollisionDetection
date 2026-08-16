@@ -7,6 +7,8 @@ sketch: null
 
 # SEÇÃO 3: DESAFIOS
 
+![Ilustração de Desafio](images/challenge.jpg)
+
 Desafios sobre algoritmos com linhas:
 
 1. **Faíscas na Interseção**: Na função [Linha/Linha](line-line), tente desenhar uma pequena explosão de partículas ou círculo vermelho no ponto exato da interseção.

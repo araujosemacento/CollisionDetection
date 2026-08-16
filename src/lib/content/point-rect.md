@@ -21,6 +21,8 @@ Para verificar se um ponto `(px, py)` está dentro de um retângulo definido pel
 3. O Y do ponto é maior ou igual à borda superior (`py >= ry`)
 4. O Y do ponto é menor ou igual à borda inferior (`py <= ry + rh`)
 
+![Borda esquerda e limites do retângulo](images/rect-bounding-box.jpg)
+
 <CodeTabs>
 
 ```javascript

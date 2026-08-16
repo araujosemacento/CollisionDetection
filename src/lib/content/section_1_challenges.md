@@ -7,6 +7,8 @@ sketch: null
 
 # SEÇÃO 1: DESAFIOS
 
+![Ilustração de Desafio](images/challenge.jpg)
+
 Tente estes desafios para exercitar e modificar os algoritmos que escrevemos até agora:
 
 1. **Mudança de Cor**: Tente alterar a cor das formas quando colidirem (ex: mudar para verde ou vermelho ao invés de laranja).

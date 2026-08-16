@@ -9,4 +9,6 @@ sketch: null
 	import TableOfContents from '$lib/components/TableOfContents.svelte';
 </script>
 
+![Formas geométricas básicas](images/table-of-contents.jpg)
+
 <TableOfContents />

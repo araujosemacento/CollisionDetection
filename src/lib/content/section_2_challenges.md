@@ -7,6 +7,8 @@ sketch: null
 
 # SEÇÃO 2: DESAFIOS
 
+![Ilustração de Desafio](images/challenge.jpg)
+
 Tente estes desafios práticos:
 
 1. **Gradiente de Proximidade**: Você consegue fazer com que um objeto mude de cor gradualmente conforme o mouse se aproxima? Dica: use a função `map()` do p5.js para converter a distância em um intervalo de cores RGB.

@@ -75,3 +75,5 @@ def circle_circle(c1x, c1y, c1r, c2x, c2y, c2r):
 ## BOUNDING CIRCLES (CÍRCULOS DELIMITADORES)
 
 A colisão **Círculo/Círculo** é amplamente utilizada para criar "círculos delimitadores" (*bounding circles*) em torno de objetos complexos. Embora sacrifique um pouco de precisão, este tipo de teste é extremamente veloz e serve como uma ótima aproximação inicial.
+
+![Exemplo de Bounding Circle ao redor de um dodecágono](images/bounding-circle.jpg)

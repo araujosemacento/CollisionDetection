@@ -30,6 +30,8 @@ area3 = Math.abs((x3 - px) * (y1 - py) - (x1 - px) * (y3 - py));
 
 Se `area1 + area2 + area3 === areaOrig`, o ponto está **DENTRO** do triângulo!
 
+![Pontos fora e dentro de um triângulo formando três subtriângulos](images/tri-point.jpg)
+
 <CodeTabs>
 
 ```javascript

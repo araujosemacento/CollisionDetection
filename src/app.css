@@ -209,3 +209,60 @@ ol {
 li {
 	margin-bottom: 0.5rem;
 }
+
+/* Imagens de Conteúdo e Ilustrações */
+.chapter-body img,
+main img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 1.75rem auto;
+	border-radius: 8px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+	.chapter-body img,
+	main img {
+		background-color: #ffffff;
+		padding: 6px;
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+		filter: brightness(0.95) contrast(1.02);
+	}
+}
+
+/* Responsividade Mobile */
+@media (max-width: 640px) {
+	html,
+	body {
+		font-size: 17px;
+		line-height: 1.55;
+	}
+
+	#wrapper {
+		padding: 1rem 0.85rem 3rem 0.85rem;
+	}
+
+	h1 {
+		font-size: 1.75rem;
+		margin: 1.25rem 0 0.85rem 0;
+	}
+
+	h2 {
+		font-size: 1.35rem;
+		margin: 1.75rem 0 0.85rem 0;
+	}
+
+	.callout {
+		padding: 0.9rem 1.1rem;
+		font-size: 0.9rem;
+	}
+
+	.chapter-body img,
+	main img {
+		margin: 1.25rem auto;
+		border-radius: 6px;
+	}
+}
+

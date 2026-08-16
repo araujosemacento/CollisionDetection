@@ -19,6 +19,8 @@ Traçamos um raio horizontal imaginário partindo do ponto e indo até o infinit
 - Se cruzar um número **ímpar** de vezes &rarr; o ponto está **DENTRO**.
 - Se cruzar um número **par** de vezes &rarr; o ponto está **FORA**.
 
+![Diagrama do ponto em relação às coordenadas Y do polígono](images/poly-point.jpg)
+
 <CodeTabs>
 
 ```javascript

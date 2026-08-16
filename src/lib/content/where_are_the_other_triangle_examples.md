@@ -7,6 +7,8 @@ sketch: null
 
 # ONDE ESTÃO OS OUTROS EXEMPLOS DE TRIÂNGULO?
 
+![Triângulo com ponto de interrogação](images/where-are-other-triangle-examples.jpg)
+
 Você pode estar se perguntando onde estão os outros exemplos de colisão para triângulos (Triângulo/Círculo, Triângulo/Retângulo, Triângulo/Linha, Triângulo/Triângulo).
 
 A resposta: **nós já os fizemos!**

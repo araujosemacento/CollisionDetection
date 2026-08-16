@@ -20,6 +20,8 @@ Se o ponto `(px, py)` está na linha, a **distância do ponto até o início da 
 d1 + d2 = lineLen
 ```
 
+![Triângulos formados entre um ponto e uma linha](images/line-point.jpg)
+
 Como os números de ponto flutuante possuem imprecisão de arredondamento, adicionamos uma pequena margem de tolerância (*buffer*):
 
 <CodeTabs>

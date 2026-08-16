@@ -15,7 +15,7 @@ A colisão entre objetos é a base de grande parte das experiências em jogos e 
 Este livro explica os algoritmos por trás dessas colisões utilizando formas geométricas básicas como círculos, retângulos e linhas, para que você possa implementá-los em seus próprios projetos.
 
 <div class="callout">
-<strong>ATUALIZAÇÃO!</strong> Este site foi atualizado e traduzido para o Português (PT-BR), com suporte a telas modernas, dispositivos móveis e renderização interativa em <code>p5.js</code>.
+<strong>ATUALIZAÇÃO:</strong> Este site foi atualizado e traduzido para o Português (PT-BR), com suporte a dispositivos móveis e renderização interativa em <code>p5.js</code>.
 </div>
 
 Pronto para começar? Vá direto para o [Sumário do Livro](table_of_contents)...
@@ -27,7 +27,7 @@ Este livro cobre colisões entre pontos, círculos, retângulos, linhas, polígo
 Cada seção inclui a explicação do algoritmo de colisão e um exemplo interativo construído com **p5.js**.
 
 <div class="callout">
-<strong>NOTA!</strong> Os exemplos interativos foram projetados primordialmente para uso com mouse no computador.
+<strong>NOTA:</strong> Os exemplos interativos foram projetados primordialmente para uso com mouse no computador, mas não devem apresentar problemas de funcionamento em dispositivos móveis.
 </div>
 
 ## O QUE NÃO É COBERTO?

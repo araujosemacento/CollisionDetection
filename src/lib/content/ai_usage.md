@@ -7,9 +7,9 @@ sketch: null
 
 # USO DE INTELIGÊNCIA ARTIFICIAL
 
-Esta edição moderna e traduzida do livro **Collision Detection** foi desenvolvida com o auxílio de ferramentas avançadas de **Inteligência Artificial (Antigravity AI / Google DeepMind)** trabalhando em regime de *pair programming*.
+Esta edição modificada e traduzida do livro **Collision Detection** foi desenvolvida com o auxílio de ferramentas de **Inteligência Artificial (Antigravity AI / Google DeepMind)** trabalhando em regime de *pair programming*.
 
-O objetivo dessa colaboração foi reestruturar a obra original de **Jeff Thompson**, trazendo-a para o estado da arte do desenvolvimento web sem alterar os conceitos, a matemática e o espírito didático do livro original.
+O objetivo dessa colaboração foi reestruturar a obra original de **Jeff Thompson**, trazendo-a para "o estado da arte" do desenvolvimento web sem alterar os conceitos, a matemática e o espírito didático do livro original.
 
 ---
 
@@ -18,15 +18,15 @@ O objetivo dessa colaboração foi reestruturar a obra original de **Jeff Thomps
 A Inteligência Artificial foi empregada nas seguintes áreas principais:
 
 1. **Modernização do Ecossistema Web**:
-   - Transição da estrutura legada baseada em PHP para uma arquitetura estática moderna baseada em **SvelteKit SSG (Static Site Generation)**.
-   - Criação do sistema de abas de código reutilizáveis com suporte a **p5.js (JavaScript)**, **Processing (Java)** e **Pygame (Python)**, com persistência de preferência de leitura em `localStorage`.
+   - Transição da estrutura legado baseada em PHP para uma arquitetura estática moderna baseada em **SvelteKit SSG (Static Site Generation)**.
+   - Auxiliar na criação do sistema de abas de código reutilizáveis com suporte a **p5.js (JavaScript)**, **Processing (Java)** e **Pygame (Python)**, com persistência de preferência de leitura em `localStorage`.
 
 2. **Portabilidade dos Demonstrativos Gráficos**:
-   - Portabilidade fiel dos 19 sketches originais em Processing (Java Desktop / `web_export`) para instâncias reativas dinâmicas em **p5.js (Canvas 2D)**.
+   - Portabilidade tão fiel quanto pude dos 19 sketches originais em Processing (Java Desktop / `web_export`) para instâncias reativas dinâmicas em **p5.js (Canvas 2D)**.
    - Ajustes de responsividade e tolerância de toque (*buffers*) para garantir interatividade fluida em navegadores desktop e telas sensíveis ao toque.
 
 3. **Tradução e Adaptação Linguística**:
-   - Tradução completa de todos os capítulos teóricos do inglês para o português do Brasil (PT-BR).
+   - Tradução completa ou parcial de todos os capítulos teóricos do inglês para o português do Brasil.
    - Preservação rigorosa das explicações matemáticas, analogias e clareza conceitual desenvolvidas pelo autor original.
 
 4. **Expansão Multilinguagem (Pygame / Python)**:
