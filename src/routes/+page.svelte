@@ -7,10 +7,54 @@
 
 	let Content = $derived(data.content);
 	let meta = $derived(data.meta || {});
+
+	let pageTitle = 'Detecção de Colisão 2D - Algoritmos Interativos em p5.js e Pygame';
+	let pageDescription =
+		'Livro interativo sobre algoritmos de detecção de colisão 2D em jogos. Explicações visuais passo a passo em p5.js e código em JavaScript, Pygame (Python) e Processing (Java).';
+	let pageUrl = 'https://araujosemacento.github.io/collision_detection/';
+	let ogImage = 'https://araujosemacento.github.io/collision_detection/og-cover.png';
+
+	let jsonLd = JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Book',
+		name: 'Detecção de Colisão 2D',
+		headline: pageTitle,
+		description: pageDescription,
+		inLanguage: 'pt-BR',
+		url: pageUrl,
+		author: {
+			'@type': 'Person',
+			name: 'Jeff Thompson'
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: 'Collision Detection PT-BR'
+		}
+	});
 </script>
 
 <svelte:head>
-	<title>Detecção de Colisão 2D - Jeff Thompson</title>
+	<title>{pageTitle}</title>
+	<meta name="description" content={pageDescription} />
+	<link rel="canonical" href={pageUrl} />
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Detecção de Colisão 2D" />
+	<meta property="og:locale" content="pt_BR" />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={pageDescription} />
+	<meta property="og:url" content={pageUrl} />
+	<meta property="og:image" content={ogImage} />
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={pageTitle} />
+	<meta name="twitter:description" content={pageDescription} />
+	<meta name="twitter:image" content={ogImage} />
+
+	<!-- Structured Data (JSON-LD) -->
+	{@html `<script type="application/ld+json">${jsonLd}</script>`}
 </svelte:head>
 
 <Header slug="index" />

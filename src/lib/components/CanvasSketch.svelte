@@ -1,7 +1,7 @@
 <script>
 	import { onDestroy } from 'svelte';
 
-	let { sketchName = '' } = $props();
+	let { sketchName = '', caption = '' } = $props();
 	let container = $state(null);
 	let p5Instance = null;
 	let errorMsg = $state('');
@@ -52,7 +52,7 @@
 	});
 </script>
 
-<div class="sketch-container">
+<div class="sketch-container" role="img" aria-label={caption || `Demonstração interativa em Canvas/p5.js de colisão ${sketchName}`}>
 	<div class="sketch-wrapper" bind:this={container}>
 		{#if errorMsg}
 			<p class="error">{errorMsg}</p>
