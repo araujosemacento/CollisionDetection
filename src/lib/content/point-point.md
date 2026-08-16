@@ -12,20 +12,21 @@ caption: "Mova o mouse sobre o ponto azul alvo para testar a colisão!"
 
 # PONTO / PONTO
 
-A forma mais simples de detecção de colisão é entre dois pontos.
+#### Jeff Thompson
 
-Para testar se dois pontos estão colidindo, verificamos se suas coordenadas X e Y são exatamente iguais:
+A colisão mais simples de testar é entre dois pontos. Para verificar se dois pontos estão se tocando, simplesmente checamos se suas coordenadas X e Y são exatamente iguais!
 
 ```text
 x1 == x2  E  y1 == y2
 ```
 
-### EXEMPLO DE IMPLEMENTAÇÃO
+Encapsulamos esse código em uma função para torná-lo reutilizável. Como argumentos, passamos as coordenadas X/Y de ambos os pontos. A função retorna um valor booleano `true` ou `false`, dependendo da ocorrência ou não da colisão:
 
 <CodeTabs>
 
 ```javascript
 function pointPoint(x1, y1, x2, y2) {
+  // os dois pontos estão exatamente no mesmo local?
   if (x1 === x2 && y1 === y2) {
     return true;
   }
@@ -35,6 +36,7 @@ function pointPoint(x1, y1, x2, y2) {
 
 ```java
 boolean pointPoint(float x1, float y1, float x2, float y2) {
+  // os dois pontos estão exatamente no mesmo local?
   if (x1 == x2 && y1 == y2) {
     return true;
   }
@@ -44,6 +46,7 @@ boolean pointPoint(float x1, float y1, float x2, float y2) {
 
 ```python
 def point_point(x1, y1, x2, y2):
+    # os dois pontos estão exatamente no mesmo local?
     if x1 == x2 and y1 == y2:
         return True
     return False
@@ -56,6 +59,11 @@ def point_point(x1, y1, x2, y2):
 
 </CodeTabs>
 
-### NA PRÁTICA INTERATIVA (WEB)
+Observe o atalho de retorno utilizado no código: poderíamos ter especificado explicitamente um bloco `else { return false; }`, mas a estrutura acima produz exatamente o mesmo resultado! É um padrão comum pensar em `return false;` como o valor padrão a ser enviado de volta, a menos que as condições de colisão dentro do `if` sejam atendidas.
 
-No mundo real (e na tela de um computador), acertar uma coordenada de 1 pixel exato com o mouse pode ser difícil. Por isso, a versão interativa web deste demonstrativo inclui uma pequena zona de tolerância (*buffer*) em torno dos pontos para tornar o toque mais natural.
+<div class="callout">
+<strong>DIFICULDADE DE ACERTO:</strong> Você notará no exemplo interativo que é bastante difícil acionar essa colisão pixel a pixel (consegue adivinhar o porquê?). Este é um problema de precisão rígida que aprenderemos a solucionar criando zonas de tolerância na seção de <a href="section_1_challenges">Desafios da Seção 1</a>.
+</div>
+
+Parabéns, você acabou de estudar sua primeira função de detecção de colisão! Essa estrutura básica (explicação teórica, matemática didática, código multilinguagem e demonstração interativa) estará presente em todos os capítulos do livro.
+

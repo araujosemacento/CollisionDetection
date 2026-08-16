@@ -12,26 +12,40 @@ caption: "Mova o ponteiro do mouse para dentro do retângulo!"
 
 # PONTO / RETÂNGULO
 
-Testar a colisão entre um ponto e um retângulo é uma das verificações mais comuns no desenvolvimento de jogos (usada para selecionar botões, detectar cliques no menu ou colisão de tiros).
+#### Jeff Thompson
 
-Para verificar se um ponto `(px, py)` está dentro de um retângulo definido pela posição superior esquerda `(rx, ry)` e dimensões `(rw, rh)`, testamos quatro condições simultâneas:
+Checar colisões com objetos circulares é bastante direto porque a distância do centro até a borda é a mesma em todas as direções. Retângulos, no entanto, exigem um algoritmo um pouco mais detalhado.
 
-1. O X do ponto é maior ou igual à borda esquerda (`px >= rx`)
-2. O X do ponto é menor ou igual à borda direita (`px <= rx + rw`)
-3. O Y do ponto é maior ou igual à borda superior (`py >= ry`)
-4. O Y do ponto é menor ou igual à borda inferior (`py <= ry + rh`)
+Imagine um retângulo definido por sua posição superior esquerda `(rx, ry)` e dimensões de largura e altura `(rw, rh)`:
+
+```javascript
+let rx = 10;  // posição X (canto superior esquerdo)
+let ry = 10;  // posição Y
+let rw = 30;  // largura (width)
+let rh = 30;  // altura (height)
+```
+
+Para testar se um ponto `(px, py)` está contido dentro do retângulo, precisamos verificar quatro condições em conjunto:
+
+- O X do ponto está à **DIREITA** da borda esquerda? (`px >= rx`)
+- O X do ponto está à **ESQUERDA** da borda direita? (`px <= rx + rw`)
+- O Y do ponto está **ABAIXO** da borda superior? (`py >= ry`)
+- O Y do ponto está **ACIMA** da borda inferior? (`py <= ry + rh`)
 
 ![Borda esquerda e limites do retângulo](images/rect-bounding-box.jpg)
+
+Se **todas** as quatro afirmações forem verdadeiras simultaneamente, o ponto está dentro do retângulo!
 
 <CodeTabs>
 
 ```javascript
 function pointRect(px, py, rx, ry, rw, rh) {
-  if (px >= rx && 
-      px <= rx + rw && 
-      py >= ry && 
-      py <= ry + rh) {
-    return true;
+  // o ponto está dentro dos limites do retângulo?
+  if (px >= rx &&        // à direita da borda esquerda E
+      px <= rx + rw &&   // à esquerda da borda direita E
+      py >= ry &&        // abaixo da borda superior E
+      py <= ry + rh) {   // acima da borda inferior
+        return true;
   }
   return false;
 }
@@ -39,11 +53,12 @@ function pointRect(px, py, rx, ry, rw, rh) {
 
 ```java
 boolean pointRect(float px, float py, float rx, float ry, float rw, float rh) {
-  if (px >= rx && 
-      px <= rx+rw && 
-      py >= ry && 
-      py <= ry+rh) {
-    return true;
+  // o ponto está dentro dos limites do retângulo?
+  if (px >= rx &&        // à direita da borda esquerda E
+      px <= rx + rw &&   // à esquerda da borda direita E
+      py >= ry &&        // abaixo da borda superior E
+      py <= ry + rh) {   // acima da borda inferior
+        return true;
   }
   return false;
 }
@@ -51,16 +66,18 @@ boolean pointRect(float px, float py, float rx, float ry, float rw, float rh) {
 
 ```python
 def point_rect(px, py, rx, ry, rw, rh):
-    if (px >= rx and 
-        px <= rx + rw and 
-        py >= ry and 
-        py <= ry + rh):
+    # o ponto está dentro dos limites do retângulo?
+    if (px >= rx and        # à direita da borda esquerda E
+        px <= rx + rw and   # à esquerda da borda direita E
+        py >= ry and        # abaixo da borda superior E
+        py <= ry + rh):     # acima da borda inferior
         return True
     return False
 
-# Dica Pygame (usando o objeto Rect nativo):
+# Dica Pygame (usando a classe Rect nativa):
 # rect = pygame.Rect(rx, ry, rw, rh)
 # hit = rect.collidepoint(px, py)
 ```
 
 </CodeTabs>
+

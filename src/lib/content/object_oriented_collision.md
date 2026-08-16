@@ -12,13 +12,17 @@ caption: "Mova o círculo (objeto) com o mouse para testar a colisão contra o a
 
 # COLISÃO ORIENTADA A OBJETOS
 
-Em projetos de jogos do mundo real, os objetos da cena geralmente são instâncias de **classes**. A colisão é integrada diretamente dentro dos métodos dessas classes para modularizar e organizar o código.
+#### Jeff Thompson
+
+Parabéns! Você passou por uma quantidade enorme de algoritmos de detecção de colisão. No entanto, estes exemplos foram elaborados como demonstrações simples de como cada conceito funciona. Combiná-los em projetos maiores e jogos completos exige migrar para uma abordagem **Orientada a Objetos (POO)**. (Para uma introdução excelente sobre programação orientada a objetos em artes interativas e jogos, consulte o livro [*Nature of Code*](http://natureofcode.com/book/) de Daniel Shiffman).
+
+Por que utilizar Orientação a Objetos? Imagine que temos um círculo e uma coleção de retângulos na tela. Poderíamos tentar armazenar posições, tamanhos e estados de colisão em variáveis separadas para cada um, mas isso rapidamente se tornaria confuso e impraticável. Em vez disso, definir classes como `Circle` e `Rectangle` oferece um controle infinitamente maior e mais flexível.
 
 ---
 
-## ESTRUTURA DO CÓDIGO
+## ESTRUTURA DAS CLASSES
 
-Em vez de verificar variáveis avulsas, encapsulamos o estado e o comportamento dentro dos objetos:
+Encapsulamos o estado e o comportamento dentro dos próprios objetos. A classe `Rectangle`, por exemplo, armazena uma variável `hit` para registrar se foi atingida e mudar sua cor no método `display()`:
 
 <CodeTabs>
 
@@ -29,10 +33,14 @@ class CircleObj {
     this.y = y;
     this.r = r;
   }
+
+  // atualiza a posição para o mouse
   update() {
     this.x = mouseX;
     this.y = mouseY;
   }
+
+  // desenha o círculo
   display() {
     fill(0, 150);
     noStroke();
@@ -46,11 +54,15 @@ class RectObj {
     this.y = y;
     this.w = w;
     this.h = h;
-    this.hit = false;
+    this.hit = false; // está sendo atingido?
   }
+
+  // método interno para verificar colisão usando circleRect
   checkCollision(circle) {
     this.hit = circleRect(circle.x, circle.y, circle.r, this.x, this.y, this.w, this.h);
   }
+
+  // desenha o retângulo mudando a cor se houver colisão
   display() {
     fill(this.hit ? [255, 150, 0] : [0, 150, 255]);
     noStroke();
@@ -62,27 +74,44 @@ class RectObj {
 ```java
 class Circle {
   float x, y, r;
+
   Circle(float _x, float _y, float _r) {
-    x = _x; y = _y; r = _r;
+    x = _x;
+    y = _y;
+    r = _r;
   }
+
+  // atualiza a posição para o mouse
   void update() {
-    x = mouseX; y = mouseY;
+    x = mouseX;
+    y = mouseY;
   }
+
+  // desenha o círculo
   void display() {
-    fill(0, 150); noStroke();
+    fill(0, 150);
+    noStroke();
     ellipse(x, y, r*2, r*2);
   }
 }
 
 class Rectangle {
   float x, y, w, h;
-  boolean hit = false;
+  boolean hit = false; // está sendo atingido?
+
   Rectangle(float _x, float _y, float _w, float _h) {
-    x = _x; y = _y; w = _w; h = _h;
+    x = _x;
+    y = _y;
+    w = _w;
+    h = _h;
   }
+
+  // método interno para verificar colisão com o círculo
   void checkCollision(Circle c) {
     hit = circleRect(c.x, c.y, c.r, x, y, w, h);
   }
+
+  // desenha o retângulo mudando a cor se houver colisão
   void display() {
     if (hit) fill(255,150,0);
     else fill(0,150,255);
@@ -127,15 +156,18 @@ class Rectangle:
 
 ## LOOP PRINCIPAL DE VERIFICAÇÃO
 
-No loop principal de atualização e renderização, iteramos sobre a lista de objetos testando as interações:
+No loop principal de renderização, criamos um único objeto `Circle` e um array com múltiplos objetos `Rectangle`. Iteramos sobre a lista chamando o método de verificação de cada um:
 
 <CodeTabs>
 
 ```javascript
 function draw() {
   background(255);
+
+  // atualiza e desenha o círculo principal
   circle.update();
 
+  // percorre o array de retângulos verificando colisão e desenhando
   for (let r of rects) {
     r.checkCollision(circle);
     r.display();
@@ -149,6 +181,7 @@ function draw() {
 void draw() {
   background(255);
   
+  // percorre a lista de retângulos verificando colisão e desenhando
   for (Rectangle r : rects) {
     r.checkCollision(circle);
     r.display();
@@ -164,6 +197,7 @@ while running:
     surface.fill((255, 255, 255))
     circle.update()
 
+    # percorre a lista de retângulos verificando colisão
     for r in rects:
         r.check_collision(circle)
         r.draw(surface)
@@ -172,3 +206,6 @@ while running:
 ```
 
 </CodeTabs>
+
+> **Dica de Organização:** Conforme o projeto cresce, coloque todas as suas funções geométricas utilitárias em um módulo separado (por exemplo, `CollisionFunctions` ou `collisions.js`). Isso mantém suas classes limpas e focadas na lógica dos objetos!
+
