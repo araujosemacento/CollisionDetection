@@ -5,54 +5,111 @@ order: 4
 sketch: null
 ---
 
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
+
 # O QUE VOCÊ JÁ DEVE SABER
 
-Os exemplos deste livro utilizam **p5.js** (JavaScript) e **Processing** (Java). Embora seja necessária pouca experiência prévia em programação, é recomendável entender a estrutura básica de um sketch (como a função `setup()` e `draw()`), o uso de variáveis, desenho de formas geométricas, captura da posição do mouse e o funcionamento de condicionais `if/else`.
+Este livro é escrito utilizando o ecossistema gráfico **p5.js (JavaScript)**, mantendo também o código original em **Processing (Java)** e exemplos equivalentes em **Pygame (Python)**. Se você já programa em qualquer uma dessas ferramentas (ou em linguagens parecidas como C++, C# ou ActionScript), estará pronto para acompanhar as explicações!
 
-No final do livro, abordaremos colisões em código orientado a objetos. Compreender Programação Orientada a Objetos (POO) ajudará a organizar projetos maiores com múltiplos objetos colidindo.
+Se você for completamente iniciante em programação, recomendamos experimentar primeiro alguns tutoriais básicos de p5.js, Processing ou Pygame antes de se aprofundar nos algoritmos geométricos.
 
-<div class="callout">
-<strong>Nunca usou p5.js ou Processing antes? Sem problemas!</strong>
-Se você já utilizou qualquer outra linguagem de programação, será extremamente fácil compreender os exemplos e portar a lógica de colisão para a linguagem ou motor de sua preferência (Python, C#, C++, GDScript, etc.).
-</div>
+---
+
+## VARIÁVEIS
+
+Precisaremos de variáveis para armazenar a posição dos objetos (geralmente `x` e `y`), seus tamanhos (como `largura`, `altura` ou `raio`), a posição do ponteiro do mouse (`mouseX` e `mouseY`) e estados de colisão (`true` ou `false`).
+
+---
 
 ## FUNÇÕES
 
 O coração de todos os exemplos de colisão são as **funções**. Uma função é um bloco de código reutilizável e independente projetado para executar uma tarefa específica — como verificar a colisão entre dois objetos.
 
-Uma função *retorna* um valor (como um `boolean` `true` ou `false`). Por exemplo, em JavaScript / p5.js:
+Uma função *retorna* um valor (como um booleano `true` ou `false`). Compare a sintaxe abaixo:
+
+<CodeTabs>
 
 ```javascript
 function sayHi() {
-    return "Olá!";
+  return "Olá!";
 }
 ```
-
-E em Processing (Java):
 
 ```java
 String sayHi() {
-    return "Olá!";
+  return "Olá!";
 }
 ```
+
+```python
+def say_hi():
+    return "Olá!"
+```
+
+</CodeTabs>
 
 As funções recebem **argumentos** (parâmetros de entrada), como coordenadas X/Y e tamanhos. Aqui está uma função simples que soma dois números:
 
-```javascript
-function sum(a, b) {
-    return a + b;
-}
+<CodeTabs>
 
-let result = sum(2, 2);
-console.log(result); // 4
+```javascript
+function addNumbers(a, b) {
+  return a + b;
+}
 ```
 
-Todos os exemplos de colisão neste livro são funções pura. Elas recebem como parâmetros as propriedades dos objetos a serem testados e retornam um valor `boolean` indicando se há ou não colisão (`true` ou `false`).
+```java
+float addNumbers(float a, float b) {
+  return a + b;
+}
+```
 
-## NÚMEROS DE PONTO FLUTUANTE (FLOATS)
+```python
+def add_numbers(a, b):
+    return a + b
+```
 
-Você notará que utilizamos variáveis numéricas com decimais (`float` ou `number`). Isso nos garante:
+</CodeTabs>
 
-1. **Maior Precisão**: O cálculo de distâncias e pontos de interseção frequentemente resulta em frações decimais.
-2. **Movimento Suave**: Posições com ponto flutuante permitem movimentação contínua de objetos na tela.
-3. **Compatibilidade com Vetores**: Facilita a transição para vetores 2D (`p5.Vector` ou `PVector`), utilizados nos capítulos mais avançados.
+---
+
+## ESTRUTURAS CONDICIONAIS (IF / ELSE)
+
+Usamos instruções `if` para tomar decisões com base no resultado das funções de colisão:
+
+<CodeTabs>
+
+```javascript
+let hit = pointPoint(x1, y1, x2, y2);
+
+if (hit) {
+  console.log("Colisão detectada!");
+} else {
+  console.log("Sem colisão.");
+}
+```
+
+```java
+boolean hit = pointPoint(x1, y1, x2, y2);
+
+if (hit) {
+  println("Colisão detectada!");
+} else {
+  println("Sem colisão.");
+}
+```
+
+```python
+hit = point_point(x1, y1, x2, y2)
+
+if hit:
+    print("Colisão detectada!")
+else:
+    print("Sem colisão.")
+```
+
+</CodeTabs>
+
+Com esses conceitos básicos alinhados, você está pronto para os algoritmos de colisão!

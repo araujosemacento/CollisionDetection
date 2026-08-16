@@ -6,6 +6,10 @@ sketch: "LineLine"
 caption: "Use o mouse para cruzar as duas linhas!"
 ---
 
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
+
 # LINHA / LINHA
 
 Com este algoritmo você pode criar mecânicas incríveis de combate de espadas ou raycasting!
@@ -24,7 +28,8 @@ intersectionX = x1 + (uA * (x2 - x1));
 intersectionY = y1 + (uA * (y2 - y1));
 ```
 
-### JavaScript (p5.js)
+<CodeTabs>
+
 ```javascript
 function lineLine(x1, y1, x2, y2, x3, y3, x4, y4) {
   let denom = ((y4 - y3) * (x2 - x1)) - ((x4 - x3) * (y2 - y1));
@@ -40,7 +45,6 @@ function lineLine(x1, y1, x2, y2, x3, y3, x4, y4) {
 }
 ```
 
-### Processing (Java)
 ```java
 boolean lineLine(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
   float uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1));
@@ -52,3 +56,23 @@ boolean lineLine(float x1, float y1, float x2, float y2, float x3, float y3, flo
   return false;
 }
 ```
+
+```python
+def line_line(x1, y1, x2, y2, x3, y3, x4, y4):
+    denom = ((y4 - y3) * (x2 - x1)) - ((x4 - x3) * (y2 - y1))
+    if denom == 0:
+        return False  # linhas paralelas
+
+    uA = (((x4 - x3) * (y1 - y3)) - ((y4 - y3) * (x1 - x3))) / denom
+    uB = (((x2 - x1) * (y1 - y3)) - ((y2 - y1) * (x1 - x3))) / denom
+
+    if 0 <= uA <= 1 and 0 <= uB <= 1:
+        return True
+    return False
+
+# Ponto de interseção em Pygame:
+# intersection_x = x1 + (uA * (x2 - x1))
+# intersection_y = y1 + (uA * (y2 - y1))
+```
+
+</CodeTabs>

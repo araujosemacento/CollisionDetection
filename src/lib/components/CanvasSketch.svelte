@@ -1,7 +1,7 @@
 <script>
 	import { onDestroy } from 'svelte';
 
-	let { sketchName = '', caption = '' } = $props();
+	let { sketchName = '' } = $props();
 	let container = $state(null);
 	let p5Instance = null;
 	let errorMsg = $state('');
@@ -30,7 +30,6 @@
 				const sketchFn = sketches[currentSketch];
 
 				if (sketchFn && active && currentContainer) {
-					// Clear any residual elements in container before mounting
 					currentContainer.innerHTML = '';
 					p5Instance = new p5(sketchFn(currentContainer), currentContainer);
 				}
@@ -53,33 +52,18 @@
 	});
 </script>
 
-<figure class="sketch-figure">
-	{#if caption}
-		<figcaption>{caption}</figcaption>
-	{/if}
-
+<div class="sketch-container">
 	<div class="sketch-wrapper" bind:this={container}>
 		{#if errorMsg}
 			<p class="error">{errorMsg}</p>
 		{/if}
 	</div>
-</figure>
+</div>
 
 <style>
-	.sketch-figure {
+	.sketch-container {
 		margin: 0 0 2rem 0;
 		padding: 0;
-		text-align: center;
-	}
-
-	figcaption {
-		font-family: var(--font-heading, 'Raleway', sans-serif);
-		font-weight: 600;
-		font-size: 0.95rem;
-		color: var(--color-text-muted, #777);
-		margin-bottom: 0.75rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
 	}
 
 	.sketch-wrapper {

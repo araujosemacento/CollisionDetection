@@ -6,6 +6,10 @@ sketch: "LinePoint"
 caption: "Use o mouse para posicionar o ponto sobre o segmento de reta!"
 ---
 
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
+
 # LINHA / PONTO
 
 Para testar se um ponto está sobre um segmento de reta definido por `(x1, y1)` e `(x2, y2)`, utilizamos a propriedade da soma das distâncias:
@@ -18,13 +22,8 @@ d1 + d2 = lineLen
 
 Como os números de ponto flutuante possuem imprecisão de arredondamento, adicionamos uma pequena margem de tolerância (*buffer*):
 
-```javascript
-if (d1 + d2 >= lineLen - buffer && d1 + d2 <= lineLen + buffer) {
-    return true; // Ponto está na linha!
-}
-```
+<CodeTabs>
 
-### JavaScript (p5.js)
 ```javascript
 function linePoint(x1, y1, x2, y2, px, py) {
   let d1 = Math.hypot(px - x1, py - y1);
@@ -39,7 +38,6 @@ function linePoint(x1, y1, x2, y2, px, py) {
 }
 ```
 
-### Processing (Java)
 ```java
 boolean linePoint(float x1, float y1, float x2, float y2, float px, float py) {
   float d1 = dist(px,py, x1,y1);
@@ -53,3 +51,19 @@ boolean linePoint(float x1, float y1, float x2, float y2, float px, float py) {
   return false;
 }
 ```
+
+```python
+import math
+
+def line_point(x1, y1, x2, y2, px, py):
+    d1 = math.hypot(px - x1, py - y1)
+    d2 = math.hypot(px - x2, py - y2)
+    line_len = math.hypot(x2 - x1, y2 - y1)
+    buffer = 0.1
+
+    if line_len - buffer <= d1 + d2 <= line_len + buffer:
+        return True
+    return False
+```
+
+</CodeTabs>

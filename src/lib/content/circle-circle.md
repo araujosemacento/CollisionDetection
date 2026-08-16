@@ -6,6 +6,10 @@ sketch: "CircleCircle"
 caption: "Use o mouse para mover o círculo menor e colidir com o círculo maior!"
 ---
 
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
+
 # CÍRCULO / CÍRCULO
 
 Raramente os objetos em jogos ocupam apenas um ponto no espaço. Em seguida, podemos utilizar a mesma fórmula da distância do Teorema de Pitágoras vista no capítulo [Ponto/Círculo](/point-circle) para verificar se dois círculos estão se tocando.
@@ -20,14 +24,8 @@ let distance = Math.sqrt((distX * distX) + (distY * distY));
 
 Para verificar se há colisão, testamos se a **distância entre os centros é menor ou igual à soma dos dois raios** (`r1 + r2`):
 
-```javascript
-if (distance <= c1r + c2r) {
-    return true; // Colisão!
-}
-return false;
-```
+<CodeTabs>
 
-### JavaScript (p5.js)
 ```javascript
 function circleCircle(c1x, c1y, c1r, c2x, c2y, c2r) {
   let distX = c1x - c2x;
@@ -41,7 +39,6 @@ function circleCircle(c1x, c1y, c1r, c2x, c2y, c2r) {
 }
 ```
 
-### Processing (Java)
 ```java
 boolean circleCircle(float c1x, float c1y, float c1r, float c2x, float c2y, float c2r) {
   float distX = c1x - c2x;
@@ -55,6 +52,26 @@ boolean circleCircle(float c1x, float c1y, float c1r, float c2x, float c2y, floa
 }
 ```
 
-## BINDING CIRCLES (CÍRCULOS DELIMITADORES)
+```python
+import math
+
+def circle_circle(c1x, c1y, c1r, c2x, c2y, c2r):
+    dist_x = c1x - c2x
+    dist_y = c1y - c2y
+    distance = math.sqrt((dist_x ** 2) + (dist_y ** 2))
+
+    if distance <= (c1r + c2r):
+        return True
+    return False
+
+# Dica Pygame (usando Vector2):
+# center1 = pygame.math.Vector2(c1x, c1y)
+# center2 = pygame.math.Vector2(c2x, c2y)
+# hit = center1.distance_to(center2) <= (c1r + c2r)
+```
+
+</CodeTabs>
+
+## BOUNDING CIRCLES (CÍRCULOS DELIMITADORES)
 
 A colisão **Círculo/Círculo** é amplamente utilizada para criar "círculos delimitadores" (*bounding circles*) em torno de objetos complexos. Embora sacrifique um pouco de precisão, este tipo de teste é extremamente veloz e serve como uma ótima aproximação inicial.

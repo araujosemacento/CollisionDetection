@@ -18,7 +18,7 @@
 	<Header {slug} />
 
 	{#if meta.sketch}
-		<CanvasSketch sketchName={meta.sketch} caption={meta.caption || ''} />
+		<CanvasSketch sketchName={meta.sketch} />
 	{/if}
 
 	<main class="chapter-body">

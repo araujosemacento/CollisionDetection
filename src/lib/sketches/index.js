@@ -6,7 +6,7 @@ function getCanvasWidth(container) {
 }
 
 export const Introduction = (container) => (p) => {
-	const numEach = 40;
+	const numEach = 50;
 	let cx, cy;
 	const cr = 30;
 	const circles = [];
@@ -16,6 +16,7 @@ export const Introduction = (container) => (p) => {
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
 		cx = p.width / 2;
 		cy = p.height / 2;
 
@@ -112,7 +113,7 @@ export const Introduction = (container) => (p) => {
 			l.hit = col.lineCircle(l.x1, l.y1, l.x2, l.y2, cx, cy, cr);
 
 			p.stroke(l.hit ? [255, 150, 0, 150] : [0, 150, 255, 150]);
-			p.strokeWeight(3);
+			p.strokeWeight(5);
 			p.line(l.x1, l.y1, l.x2, l.y2);
 
 			if (l.y1 > p.height + 50 && l.y2 > p.height + 50) {
@@ -133,13 +134,15 @@ export const Introduction = (container) => (p) => {
 };
 
 export const PointPoint = (container) => (p) => {
-	const targetX = 300;
-	const targetY = 200;
+	let targetX, targetY;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
-		p.strokeWeight(8);
+		p.noCursor();
+		p.strokeWeight(15);
+		targetX = p.width / 2;
+		targetY = p.height / 2;
 	};
 
 	p.draw = () => {
@@ -158,14 +161,16 @@ export const PointPoint = (container) => (p) => {
 };
 
 export const PointCircle = (container) => (p) => {
-	const cx = 300;
-	const cy = 200;
+	let cx, cy;
 	const radius = 100;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
-		p.strokeWeight(8);
+		p.noCursor();
+		p.strokeWeight(15);
+		cx = p.width / 2;
+		cy = p.height / 2;
 	};
 
 	p.draw = () => {
@@ -186,14 +191,16 @@ export const PointCircle = (container) => (p) => {
 
 export const CircleCircle = (container) => (p) => {
 	const c1r = 30;
-	const c2x = 300;
-	const c2y = 200;
+	let c2x, c2y;
 	const c2r = 100;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
 		p.noStroke();
+		c2x = p.width / 2;
+		c2y = p.height / 2;
 	};
 
 	p.draw = () => {
@@ -212,15 +219,17 @@ export const CircleCircle = (container) => (p) => {
 };
 
 export const PointRect = (container) => (p) => {
-	const sx = 200;
-	const sy = 100;
 	const sw = 200;
 	const sh = 200;
+	let sx, sy;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
-		p.strokeWeight(8);
+		p.noCursor();
+		p.strokeWeight(15);
+		sx = p.width / 2 - sw / 2;
+		sy = p.height / 2 - sh / 2;
 	};
 
 	p.draw = () => {
@@ -242,15 +251,17 @@ export const PointRect = (container) => (p) => {
 export const RectRect = (container) => (p) => {
 	const s1w = 30;
 	const s1h = 30;
-	const s2x = 200;
-	const s2y = 100;
 	const s2w = 200;
 	const s2h = 200;
+	let s2x, s2y;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
 		p.noStroke();
+		s2x = p.width / 2 - s2w / 2;
+		s2y = p.height / 2 - s2h / 2;
 	};
 
 	p.draw = () => {
@@ -270,15 +281,17 @@ export const RectRect = (container) => (p) => {
 
 export const CircleRect = (container) => (p) => {
 	const r = 30;
-	const sx = 200;
-	const sy = 100;
 	const sw = 200;
 	const sh = 200;
+	let sx, sy;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
 		p.noStroke();
+		sx = p.width / 2 - sw / 2;
+		sy = p.height / 2 - sh / 2;
 	};
 
 	p.draw = () => {
@@ -297,14 +310,17 @@ export const CircleRect = (container) => (p) => {
 };
 
 export const LinePoint = (container) => (p) => {
-	const x1 = 100;
-	const y1 = 300;
-	const x2 = 500;
-	const y2 = 100;
+	let x1, y1, x2, y2;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.strokeWeight(15);
+		x1 = 100;
+		y1 = p.height - 100;
+		x2 = p.width - 100;
+		y2 = 100;
 	};
 
 	p.draw = () => {
@@ -315,10 +331,10 @@ export const LinePoint = (container) => (p) => {
 		const hit = col.linePoint(x1, y1, x2, y2, px, py);
 
 		p.strokeWeight(5);
-		p.stroke(hit ? [255, 150, 0] : [0, 150, 255]);
+		p.stroke(hit ? [255, 150, 0, 150] : [0, 150, 255, 150]);
 		p.line(x1, y1, x2, y2);
 
-		p.strokeWeight(8);
+		p.strokeWeight(15);
 		p.stroke(0, 150);
 		p.point(px, py);
 	};
@@ -331,6 +347,7 @@ export const LineCircle = (container) => (p) => {
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
 		x1 = 100;
 		y1 = p.height - 100;
 		x2 = p.width - 100;
@@ -345,7 +362,7 @@ export const LineCircle = (container) => (p) => {
 		const hit = col.lineCircle(x1, y1, x2, y2, cx, cy, r);
 
 		p.strokeWeight(5);
-		p.stroke(hit ? [255, 150, 0] : [0, 150, 255]);
+		p.stroke(hit ? [255, 150, 0, 150] : [0, 150, 255, 150]);
 		p.line(x1, y1, x2, y2);
 
 		p.fill(0, 150);
@@ -357,14 +374,17 @@ export const LineCircle = (container) => (p) => {
 export const LineLine = (container) => (p) => {
 	const x2 = 20;
 	const y2 = 20;
-	const x3 = 100;
-	const y3 = 300;
-	const x4 = 500;
-	const y4 = 100;
+	let x3, y3, x4, y4;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.strokeWeight(15);
+		x3 = 100;
+		y3 = p.height - 100;
+		x4 = p.width - 100;
+		y4 = 100;
 	};
 
 	p.draw = () => {
@@ -375,25 +395,41 @@ export const LineLine = (container) => (p) => {
 		const hit = col.lineLine(x1, y1, x2, y2, x3, y3, x4, y4);
 
 		p.strokeWeight(5);
-		p.stroke(hit ? [255, 150, 0] : [0, 150, 255]);
+		p.stroke(hit ? [255, 150, 0, 150] : [0, 150, 255, 150]);
 		p.line(x3, y3, x4, y4);
 
+		p.strokeWeight(5);
 		p.stroke(0, 150);
 		p.line(x1, y1, x2, y2);
+
+		if (hit) {
+			const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+			if (denom !== 0) {
+				const uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom;
+				const intersectionX = x1 + uA * (x2 - x1);
+				const intersectionY = y1 + uA * (y2 - y1);
+				p.fill(255, 0, 0);
+				p.noStroke();
+				p.ellipse(intersectionX, intersectionY, 20, 20);
+			}
+		}
 	};
 };
 
 export const LineRect = (container) => (p) => {
 	const x2 = 20;
 	const y2 = 20;
-	const sx = 200;
-	const sy = 100;
 	const sw = 200;
 	const sh = 200;
+	let sx, sy;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.strokeWeight(5);
+		sx = p.width / 2 - sw / 2;
+		sy = p.height / 2 - sh / 2;
 	};
 
 	p.draw = () => {
@@ -414,16 +450,18 @@ export const LineRect = (container) => (p) => {
 };
 
 export const PolyPoint = (container) => (p) => {
-	const vertices = [
-		{ x: 200, y: 100 },
-		{ x: 400, y: 130 },
-		{ x: 350, y: 300 },
-		{ x: 250, y: 300 }
-	];
+	const vertices = [];
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.strokeWeight(15);
+
+		vertices.push({ x: p.width / 2 - 100, y: p.height / 2 - 100 });
+		vertices.push({ x: p.width / 2 + 100, y: p.height / 2 - 100 });
+		vertices.push({ x: p.width / 2 + 50, y: p.height / 2 + 100 });
+		vertices.push({ x: p.width / 2 - 50, y: p.height / 2 + 100 });
 	};
 
 	p.draw = () => {
@@ -441,7 +479,7 @@ export const PolyPoint = (container) => (p) => {
 		}
 		p.endShape(p.CLOSE);
 
-		p.strokeWeight(8);
+		p.strokeWeight(15);
 		p.stroke(0, 150);
 		p.point(px, py);
 	};
@@ -449,16 +487,18 @@ export const PolyPoint = (container) => (p) => {
 
 export const PolyCircle = (container) => (p) => {
 	const r = 30;
-	const vertices = [
-		{ x: 200, y: 100 },
-		{ x: 400, y: 100 },
-		{ x: 350, y: 300 },
-		{ x: 250, y: 300 }
-	];
+	const vertices = [];
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.noStroke();
+
+		vertices.push({ x: p.width / 2 - 100, y: p.height / 2 - 100 });
+		vertices.push({ x: p.width / 2 + 100, y: p.height / 2 - 100 });
+		vertices.push({ x: p.width / 2 + 50, y: p.height / 2 + 100 });
+		vertices.push({ x: p.width / 2 - 50, y: p.height / 2 + 100 });
 	};
 
 	p.draw = () => {
@@ -484,16 +524,18 @@ export const PolyCircle = (container) => (p) => {
 export const PolyRect = (container) => (p) => {
 	const sw = 30;
 	const sh = 30;
-	const vertices = [
-		{ x: 100, y: 100 },
-		{ x: 400, y: 100 },
-		{ x: 500, y: 300 },
-		{ x: 200, y: 300 }
-	];
+	const vertices = [];
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.noStroke();
+
+		vertices.push({ x: p.width / 2 - 100, y: p.height / 2 - 100 });
+		vertices.push({ x: p.width / 2 + 100, y: p.height / 2 - 100 });
+		vertices.push({ x: p.width / 2 + 50, y: p.height / 2 + 100 });
+		vertices.push({ x: p.width / 2 - 50, y: p.height / 2 + 100 });
 	};
 
 	p.draw = () => {
@@ -501,7 +543,7 @@ export const PolyRect = (container) => (p) => {
 		const sx = p.mouseX;
 		const sy = p.mouseY;
 
-		const hit = col.polyRect(vertices, sx, sy, sw, sh);
+		const hit = col.polyRect(sx, sy, sw, sh, vertices);
 
 		p.noStroke();
 		p.fill(hit ? [255, 150, 0] : [0, 150, 255]);
@@ -524,13 +566,15 @@ export const PolyLine = (container) => (p) => {
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.strokeWeight(15);
 
 		const numSides = 16;
 		const angle = (Math.PI * 2) / numSides;
 		for (let i = 0; i < numSides; i++) {
 			const a = angle * i;
-			const x = 300 + Math.cos(a) * 100;
-			const y = 200 + Math.sin(a) * 100;
+			const x = p.width / 2 + Math.cos(a) * 100;
+			const y = p.height / 2 + Math.sin(a) * 100;
 			vertices.push({ x, y });
 		}
 	};
@@ -563,13 +607,15 @@ export const PolyPoly = (container) => (p) => {
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.noStroke();
 
 		const angle = (Math.PI * 2) / 5;
 		for (let i = 0; i < 5; i++) {
 			const a = angle * i;
 			pentagon.push({
-				x: 300 + Math.cos(a) * 100,
-				y: 200 + Math.sin(a) * 100
+				x: p.width / 2 + Math.cos(a) * 100,
+				y: p.height / 2 + Math.sin(a) * 100
 			});
 		}
 
@@ -618,16 +664,20 @@ export const PolyPoly = (container) => (p) => {
 };
 
 export const TriPoint = (container) => (p) => {
-	const x1 = 300,
-		y1 = 100;
-	const x2 = 450,
-		y2 = 300;
-	const x3 = 150,
-		y3 = 300;
+	let x1, y1, x2, y2, x3, y3;
 
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
+		p.strokeWeight(15);
+
+		x1 = p.width / 2;
+		y1 = 100;
+		x2 = p.width / 2 + 150;
+		y2 = p.height - 100;
+		x3 = p.width / 2 - 150;
+		y3 = p.height - 100;
 	};
 
 	p.draw = () => {
@@ -635,13 +685,13 @@ export const TriPoint = (container) => (p) => {
 		const px = p.mouseX;
 		const py = p.mouseY;
 
-		const hit = col.triPoint(x1, y1, x2, y2, x3, y3, px, py);
+		const hit = col.triPoint(px, py, x1, y1, x2, y2, x3, y3);
 
 		p.noStroke();
 		p.fill(hit ? [255, 150, 0] : [0, 150, 255]);
 		p.triangle(x1, y1, x2, y2, x3, y3);
 
-		p.strokeWeight(8);
+		p.strokeWeight(15);
 		p.stroke(0, 150);
 		p.point(px, py);
 	};
@@ -701,6 +751,7 @@ export const ObjectOrientedCollision = (container) => (p) => {
 	p.setup = () => {
 		const w = getCanvasWidth(container);
 		p.createCanvas(w, 400);
+		p.noCursor();
 
 		circle = new CircleObj(30);
 		for (let i = 0; i < 8; i++) {

@@ -3,46 +3,67 @@ title: "Retângulo / Retângulo"
 slug: "rect-rect"
 order: 10
 sketch: "RectRect"
-caption: "Use o mouse para mover o retângulo menor e colidir com o retângulo central!"
+caption: "Mova o retângulo menor com o mouse para colidir com o retângulo maior!"
 ---
+
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
 
 # RETÂNGULO / RETÂNGULO
 
-Passar de [Ponto/Retângulo](/point-rect) para dois retângulos é conceitualmente simples, mas os testes relacionam 4 bordas simultâneas:
+Assim como no capítulo [Ponto/Retângulo](/point-rect), para verificar a colisão entre dois retângulos alinhados aos eixos (AABB - *Axis-Aligned Bounding Box*), comparamos as bordas dos dois objetos.
 
-1. A **borda direita de r1** passou da **borda esquerda de r2**? (`r1x + r1w >= r2x`)
-2. A **borda esquerda de r1** está antes da **borda direita de r2**? (`r1x <= r2x + r2w`)
-3. A **borda inferior de r1** passou da **borda superior de r2**? (`r1y + r1h >= r2y`)
-4. A **borda superior de r1** está antes da **borda inferior de r2**? (`r1y <= r2y + r2h`)
+A colisão ocorre se todas as quatro condições de sobreposição das bordas forem verdadeiras:
 
-Se todas essas quatro condições forem verdadeiras, os dois retângulos estão se sobrepondo (colidindo)!
+1. A borda direita do retângulo 1 passa da borda esquerda do retângulo 2 (`r1x + r1w >= r2x`)
+2. A borda esquerda do retângulo 1 está antes da borda direita do retângulo 2 (`r1x <= r2x + r2w`)
+3. A borda inferior do retângulo 1 passa da borda superior do retângulo 2 (`r1y + r1h >= r2y`)
+4. A borda superior do retângulo 1 está antes da borda inferior do retângulo 2 (`r1y <= r2y + r2h`)
 
-### JavaScript (p5.js)
+<CodeTabs>
+
 ```javascript
 function rectRect(r1x, r1y, r1w, r1h, r2x, r2y, r2w, r2h) {
-  if (r1x + r1w >= r2x &&    // borda direita de r1 passa da esquerda de r2 E
-      r1x <= r2x + r2w &&    // borda esquerda de r1 antes da direita de r2 E
-      r1y + r1h >= r2y &&    // borda inferior de r1 passa da superior de r2 E
-      r1y <= r2y + r2h) {    // borda superior de r1 antes da inferior de r2
-        return true;
+  if (r1x + r1w >= r2x && 
+      r1x <= r2x + r2w && 
+      r1y + r1h >= r2y && 
+      r1y <= r2y + r2h) {
+    return true;
   }
   return false;
 }
 ```
 
-### Processing (Java)
 ```java
 boolean rectRect(float r1x, float r1y, float r1w, float r1h, float r2x, float r2y, float r2w, float r2h) {
-  if (r1x + r1w >= r2x &&
-      r1x <= r2x + r2w &&
-      r1y + r1h >= r2y &&
+  if (r1x + r1w >= r2x && 
+      r1x <= r2x + r2w && 
+      r1y + r1h >= r2y && 
       r1y <= r2y + r2h) {
-        return true;
+    return true;
   }
   return false;
 }
 ```
 
-## CAIXAS DELIMITADORAS (BOUNDING BOXES / AABB)
+```python
+def rect_rect(r1x, r1y, r1w, r1h, r2x, r2y, r2w, r2h):
+    if (r1x + r1w >= r2x and 
+        r1x <= r2x + r2w and 
+        r1y + r1h >= r2y and 
+        r1y <= r2y + r2h):
+        return True
+    return False
 
-Esta técnica é o clássico **Axis-Aligned Bounding Box (AABB)**. É o teste mais utilizado na indústria de jogos para caixas de colisão preliminares por conta do baixíssimo custo computacional.
+# Dica Pygame (usando o método nativo colliderect):
+# rect1 = pygame.Rect(r1x, r1y, r1w, r1h)
+# rect2 = pygame.Rect(r2x, r2y, r2w, r2h)
+# hit = rect1.colliderect(rect2)
+```
+
+</CodeTabs>
+
+## AABB (AXIS-ALIGNED BOUNDING BOX)
+
+Este algoritmo pressupõe que os retângulos **não estão rotacionados**. Essa é a base do sistema de colisão de quase todos os jogos 2D clássicos como *Super Mario*, *Platformers* e *Top-Down Shooters*!

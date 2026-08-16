@@ -33,22 +33,23 @@
 
 {#if slug !== 'index'}
 	<header class="header-nav">
-		<p class="nav-container">
-			<span class="nav-prev">
+		<div class="nav-container">
+			<div class="nav-prev">
 				{#if info?.prev}
 					<a
 						href="/{info.prev.slug}"
 						onmouseenter={() => handlePrevHover(true)}
 						onmouseleave={() => handlePrevHover(false)}
+						aria-label="Capítulo anterior"
 					>
 						&larr;
 					</a>
 				{:else}
 					&nbsp;
 				{/if}
-			</span>
+			</div>
 
-			<span class="nav-title">
+			<div class="nav-title">
 				{#if slug === 'table_of_contents'}
 					<a href="/">Detecção de Colisão</a>
 				{:else}
@@ -60,28 +61,29 @@
 						{titleText}
 					</a>
 				{/if}
-			</span>
+			</div>
 
-			<span class="nav-next">
+			<div class="nav-next">
 				{#if info?.next}
 					<a
 						href="/{info.next.slug}"
 						onmouseenter={() => handleNextHover(true)}
 						onmouseleave={() => handleNextHover(false)}
+						aria-label="Próximo capítulo"
 					>
 						&rarr;
 					</a>
 				{:else}
 					&nbsp;
 				{/if}
-			</span>
-		</p>
+			</div>
+		</div>
 	</header>
 {/if}
 
 <style>
 	.header-nav {
-		margin: 2rem 0 1.5rem 0;
+		margin: 1.5rem 0 2rem 0;
 		font-family: var(--font-heading, 'Raleway', sans-serif);
 	}
 
@@ -89,6 +91,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		width: 100%;
 		margin: 0;
 		padding: 0;
 	}
@@ -97,15 +100,25 @@
 	.nav-next {
 		font-size: 1.5rem;
 		font-weight: bold;
-		width: 40px;
+		width: 48px;
+		flex-shrink: 0;
 		text-align: center;
 	}
 
 	.nav-title {
+		flex: 1;
+		text-align: center;
 		font-size: 1.1rem;
 		font-weight: 800;
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
+	}
+
+	.nav-title a {
+		display: block;
+		width: 100%;
+		padding: 0.2rem 0;
+		text-align: center;
 	}
 
 	a {

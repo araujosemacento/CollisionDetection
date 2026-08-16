@@ -3,19 +3,23 @@ title: "Linha / Círculo"
 slug: "line-circle"
 order: 14
 sketch: "LineCircle"
-caption: "Mova o círculo para colidir com a linha!"
+caption: "Use o mouse para posicionar o círculo sobre a linha!"
 ---
+
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
 
 # LINHA / CÍRCULO
 
-Para testar a colisão entre um segmento de reta e um círculo:
+Para verificar se um segmento de reta colide com um círculo:
 
-1. Verificamos primeiro se qualquer uma das duas extremidades da linha está dentro do círculo (usando `pointCircle`).
-2. Projetamos vetorialmente o centro do círculo sobre a reta usando o produto escalar (*dot product*) para encontrar o **ponto mais próximo da linha**.
-3. Verificamos se esse ponto mais próximo está realmente no segmento de reta (`linePoint`).
-4. Se estiver no segmento, calculamos a distância até o centro do círculo: se for menor ou igual ao raio `r`, temos uma colisão!
+1. Testamos se alguma das extremidades da linha já está **dentro** do círculo (usando `pointCircle`).
+2. Calculamos o **ponto mais próximo** da linha em relação ao centro do círculo usando produto escalar (*dot product*).
+3. Verificamos se esse ponto mais próximo pertence ao segmento de reta e se sua distância até o centro é menor ou igual ao raio.
 
-### JavaScript (p5.js)
+<CodeTabs>
+
 ```javascript
 function lineCircle(x1, y1, x2, y2, cx, cy, r) {
   let inside1 = pointCircle(x1, y1, cx, cy, r);
@@ -42,7 +46,6 @@ function lineCircle(x1, y1, x2, y2, cx, cy, r) {
 }
 ```
 
-### Processing (Java)
 ```java
 boolean lineCircle(float x1, float y1, float x2, float y2, float cx, float cy, float r) {
   boolean inside1 = pointCircle(x1,y1, cx,cy,r);
@@ -71,3 +74,32 @@ boolean lineCircle(float x1, float y1, float x2, float y2, float cx, float cy, f
   return false;
 }
 ```
+
+```python
+import math
+
+def line_circle(x1, y1, x2, y2, cx, cy, r):
+    inside1 = point_circle(x1, y1, cx, cy, r)
+    inside2 = point_circle(x2, y2, cx, cy, r)
+    if inside1 or inside2:
+        return True
+
+    line_len = math.hypot(x1 - x2, y1 - y2)
+    dot = (((cx - x1) * (x2 - x1)) + ((cy - y1) * (y2 - y1))) / (line_len ** 2)
+
+    closest_x = x1 + (dot * (x2 - x1))
+    closest_y = y1 + (dot * (y2 - y1))
+
+    if not line_point(x1, y1, x2, y2, closest_x, closest_y):
+        return False
+
+    dist_x = closest_x - cx
+    dist_y = closest_y - cy
+    distance = math.sqrt((dist_x ** 2) + (dist_y ** 2))
+
+    if distance <= r:
+        return True
+    return False
+```
+
+</CodeTabs>

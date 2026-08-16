@@ -1,7 +1,11 @@
 // Utility collision detection functions for p5.js
 
-export function pointPoint(x1, y1, x2, y2) {
-	return x1 === x2 && y1 === y2;
+export function pointPoint(x1, y1, x2, y2, buffer = 3) {
+	// Web version treats points like small circles to make interaction natural
+	const distX = x1 - x2;
+	const distY = y1 - y2;
+	const distance = Math.sqrt(distX * distX + distY * distY);
+	return distance <= buffer * 2;
 }
 
 export function pointCircle(px, py, cx, cy, r) {
@@ -131,7 +135,7 @@ export function polyCircle(vertices, cx, cy, r) {
 	return false;
 }
 
-export function polyRect(vertices, rx, ry, rw, rh) {
+export function polyRect(rx, ry, rw, rh, vertices) {
 	let next = 0;
 	for (let current = 0; current < vertices.length; current++) {
 		next = current + 1;
@@ -184,12 +188,11 @@ export function polyPoly(p1, p2) {
 	return false;
 }
 
-export function triPoint(x1, y1, x2, y2, x3, y3, px, py) {
+export function triPoint(px, py, x1, y1, x2, y2, x3, y3) {
 	const areaOrig = Math.abs((x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1));
 	const area1 = Math.abs((x1 - px) * (y2 - py) - (x2 - px) * (y1 - py));
 	const area2 = Math.abs((x2 - px) * (y3 - py) - (x3 - px) * (y2 - py));
 	const area3 = Math.abs((x3 - px) * (y1 - py) - (x1 - px) * (y3 - py));
 
-	// Allow slight floating point tolerance
 	return Math.abs(area1 + area2 + area3 - areaOrig) < 0.01;
 }

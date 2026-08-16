@@ -6,6 +6,7 @@
       "name": "collisiondetection",
       "dependencies": {
         "p5": "^2.3.2",
+        "prismjs": "^1.30.0",
       },
       "devDependencies": {
         "@sveltejs/adapter-static": "^3.0.10",

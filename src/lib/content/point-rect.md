@@ -3,77 +3,62 @@ title: "Ponto / Retângulo"
 slug: "point-rect"
 order: 9
 sketch: "PointRect"
-caption: "Mova o ponteiro do mouse (ponto) para dentro do retângulo!"
+caption: "Mova o ponteiro do mouse para dentro do retângulo!"
 ---
+
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
 
 # PONTO / RETÂNGULO
 
-Testar a colisão com objetos circulares é simples porque a distância do centro até a borda é idêntica em todas as direções. Retângulos, por outro lado, exigem um algoritmo baseado nos seus limites laterais (Bounding Box).
+Testar a colisão entre um ponto e um retângulo é uma das verificações mais comuns no desenvolvimento de jogos (usada para selecionar botões, detectar cliques no menu ou colisão de tiros).
 
-Para testar se um ponto está dentro de um retângulo, verificamos 4 condições simultâneas:
+Para verificar se um ponto `(px, py)` está dentro de um retângulo definido pela posição superior esquerda `(rx, ry)` e dimensões `(rw, rh)`, testamos quatro condições simultâneas:
 
-1. A posição X do ponto está à **direita da borda esquerda**? (`px >= rx`)
-2. A posição X do ponto está à **esquerda da borda direita**? (`px <= rx + rw`)
-3. A posição Y do ponto está **abaixo da borda superior**? (`py >= ry`)
-4. A posição Y do ponto está **acima da borda inferior**? (`py <= ry + rh`)
+1. O X do ponto é maior ou igual à borda esquerda (`px >= rx`)
+2. O X do ponto é menor ou igual à borda direita (`px <= rx + rw`)
+3. O Y do ponto é maior ou igual à borda superior (`py >= ry`)
+4. O Y do ponto é menor ou igual à borda inferior (`py <= ry + rh`)
 
-Se **todas** as 4 condições forem verdadeiras, o ponto está dentro do retângulo!
+<CodeTabs>
 
-### JavaScript (p5.js)
 ```javascript
 function pointRect(px, py, rx, ry, rw, rh) {
-  if (px >= rx &&        // à direita da borda esquerda E
-      px <= rx + rw &&   // à esquerda da borda direita E
-      py >= ry &&        // abaixo da borda superior E
-      py <= ry + rh) {   // acima da borda inferior
-        return true;
+  if (px >= rx && 
+      px <= rx + rw && 
+      py >= ry && 
+      py <= ry + rh) {
+    return true;
   }
   return false;
 }
 ```
 
-### Processing (Java)
 ```java
 boolean pointRect(float px, float py, float rx, float ry, float rw, float rh) {
-  if (px >= rx &&
-      px <= rx + rw &&
-      py >= ry &&
-      py <= ry + rh) {
-        return true;
+  if (px >= rx && 
+      px <= rx+rw && 
+      py >= ry && 
+      py <= ry+rh) {
+    return true;
   }
   return false;
 }
 ```
 
-## EXEMPLO COMPLETO
+```python
+def point_rect(px, py, rx, ry, rw, rh):
+    if (px >= rx and 
+        px <= rx + rw and 
+        py >= ry and 
+        py <= ry + rh):
+        return True
+    return False
 
-```javascript
-let px = 0, py = 0;
-let rx = 200, ry = 100;
-let rw = 200, rh = 200;
-
-function setup() {
-  createCanvas(600, 400);
-  noCursor();
-  strokeWeight(5);
-}
-
-function draw() {
-  background(255);
-  px = mouseX;
-  py = mouseY;
-
-  let hit = pointRect(px, py, rx, ry, rw, rh);
-
-  if (hit) {
-    fill(255, 150, 0);
-  } else {
-    fill(0, 150, 255);
-  }
-  noStroke();
-  rect(rx, ry, rw, rh);
-
-  stroke(0);
-  point(px, py);
-}
+# Dica Pygame (usando o objeto Rect nativo):
+# rect = pygame.Rect(rx, ry, rw, rh)
+# hit = rect.collidepoint(px, py)
 ```
+
+</CodeTabs>

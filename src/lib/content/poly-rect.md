@@ -3,27 +3,22 @@ title: "Polígono / Retângulo"
 slug: "poly-rect"
 order: 20
 sketch: "PolyRect"
-caption: "Mova o retângulo menor para colidir com o polígono!"
+caption: "Mova o retângulo com o mouse para atingir o polígono!"
 ---
+
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
 
 # POLÍGONO / RETÂNGULO
 
-Testamos a colisão entre cada aresta do polígono e os quatro lados do retângulo usando a função [Linha/Retângulo](/line-rect):
+Para testar se um retângulo colide com um polígono:
 
-```javascript
-for (let current = 0; current < vertices.length; current++) {
-    let next = current + 1;
-    if (next === vertices.length) next = 0;
+1. Testamos todas as arestas do polígono contra os 4 lados do retângulo usando a função [Linha/Retângulo](/line-rect).
+2. Opcionalmente, testamos se o retângulo está totalmente contido dentro do polígono usando [Polígono/Ponto](/poly-point).
 
-    let vc = vertices[current];
-    let vn = vertices[next];
+<CodeTabs>
 
-    let collision = lineRect(vc.x, vc.y, vn.x, vn.y, rx, ry, rw, rh);
-    if (collision) return true;
-}
-```
-
-### JavaScript (p5.js)
 ```javascript
 function polyRect(vertices, rx, ry, rw, rh) {
   let next = 0;
@@ -44,9 +39,8 @@ function polyRect(vertices, rx, ry, rw, rh) {
 }
 ```
 
-### Processing (Java)
 ```java
-boolean polyRect(PVector[] vertices, float rx, float ry, float rw, float rh) {
+boolean polyRect(float rx, float ry, float rw, float rh, PVector[] vertices) {
   int next = 0;
   for (int current=0; current<vertices.length; current++) {
     next = current+1;
@@ -58,9 +52,31 @@ boolean polyRect(PVector[] vertices, float rx, float ry, float rw, float rh) {
     boolean collision = lineRect(vc.x,vc.y,vn.x,vn.y, rx,ry,rw,rh);
     if (collision) return true;
 
-    boolean inside = polygonPoint(vertices, rx,ry);
+    boolean inside = polygonPoint(rx,ry, vertices);
     if (inside) return true;
   }
   return false;
 }
 ```
+
+```python
+def poly_rect(vertices, rx, ry, rw, rh):
+    next_idx = 0
+    for current in range(len(vertices)):
+        next_idx = current + 1
+        if next_idx == len(vertices):
+            next_idx = 0
+
+        vc = vertices[current]
+        vn = vertices[next_idx]
+
+        if line_rect(vc[0], vc[1], vn[0], vn[1], rx, ry, rw, rh):
+            return True
+
+        if poly_point(vertices, rx, ry):
+            return True
+
+    return False
+```
+
+</CodeTabs>

@@ -3,29 +3,19 @@ title: "Polígono / Círculo"
 slug: "poly-circle"
 order: 19
 sketch: "PolyCircle"
-caption: "Mova o círculo com o mouse para colidir com o polígono!"
+caption: "Mova o círculo com o mouse para atingir o polígono!"
 ---
+
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
 
 # POLÍGONO / CÍRCULO
 
-Para testar a colisão entre um polígono e um círculo, percorremos cada uma das arestas do polígono (os segmentos de reta entre vértices adjacentes) e aplicamos a função [Linha/Círculo](/line-circle):
+Testamos a colisão de um círculo contra um polígono verificando a colisão da circunferência contra cada uma das arestas usando a função [Linha/Círculo](/line-circle):
 
-```javascript
-for (let current = 0; current < vertices.length; current++) {
-    let next = current + 1;
-    if (next === vertices.length) next = 0;
+<CodeTabs>
 
-    let vc = vertices[current];
-    let vn = vertices[next];
-
-    let collision = lineCircle(vc.x, vc.y, vn.x, vn.y, cx, cy, r);
-    if (collision) return true;
-}
-```
-
-Caso deseje também detectar se o círculo está completamente contido **dentro** do polígono (sem tocar as bordas), podemos opcionalmente testar se o centro do círculo está dentro do polígono com `polyPoint(vertices, cx, cy)`.
-
-### JavaScript (p5.js)
 ```javascript
 function polyCircle(vertices, cx, cy, r) {
   let next = 0;
@@ -43,7 +33,6 @@ function polyCircle(vertices, cx, cy, r) {
 }
 ```
 
-### Processing (Java)
 ```java
 boolean polyCircle(PVector[] vertices, float cx, float cy, float r) {
   int next = 0;
@@ -60,3 +49,22 @@ boolean polyCircle(PVector[] vertices, float cx, float cy, float r) {
   return false;
 }
 ```
+
+```python
+def poly_circle(vertices, cx, cy, r):
+    next_idx = 0
+    for current in range(len(vertices)):
+        next_idx = current + 1
+        if next_idx == len(vertices):
+            next_idx = 0
+
+        vc = vertices[current]
+        vn = vertices[next_idx]
+
+        if line_circle(vc[0], vc[1], vn[0], vn[1], cx, cy, r):
+            return True
+
+    return False
+```
+
+</CodeTabs>

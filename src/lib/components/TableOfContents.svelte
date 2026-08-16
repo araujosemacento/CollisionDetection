@@ -4,27 +4,27 @@
 	const sections = [
 		{
 			name: 'Introdução & Conceitos Básicos',
-			items: chapters.slice(0, 4)
+			items: chapters.slice(0, 5)
 		},
 		{
 			name: 'Seção 1: Pontos e Círculos',
-			items: chapters.slice(4, 8)
+			items: chapters.slice(5, 9)
 		},
 		{
 			name: 'Seção 2: Retângulos',
-			items: chapters.slice(8, 12)
+			items: chapters.slice(9, 13)
 		},
 		{
 			name: 'Seção 3: Linhas',
-			items: chapters.slice(12, 17)
+			items: chapters.slice(13, 18)
 		},
 		{
 			name: 'Seção 4: Polígonos',
-			items: chapters.slice(17, 23)
+			items: chapters.slice(18, 24)
 		},
 		{
 			name: 'Seção 5: Triângulos & Orientação a Objetos',
-			items: chapters.slice(23)
+			items: chapters.slice(24)
 		}
 	];
 </script>

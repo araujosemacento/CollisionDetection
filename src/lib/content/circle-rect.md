@@ -3,33 +3,32 @@ title: "Círculo / Retângulo"
 slug: "circle-rect"
 order: 11
 sketch: "CircleRect"
-caption: "Mova o círculo com o mouse para colidir com o retângulo central!"
+caption: "Mova o círculo com o mouse para colidir com o retângulo!"
 ---
+
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
 
 # CÍRCULO / RETÂNGULO
 
-Esta colisão combina conceitos de círculos e retângulos. Temos um círculo na posição `(cx, cy)` com raio `r` e um retângulo em `(rx, ry)` com largura/altura `(rw, rh)`.
+Testar a colisão entre um círculo e um retângulo parece complexo, mas é resolvido em duas etapas simples:
 
-Nosso algoritmo primeiro identifica **qual borda do retângulo está mais próxima do centro do círculo**, e em seguida aplica o Teorema de Pitágoras para verificar a distância:
+1. Encontramos o **ponto mais próximo** do centro do círculo que pertence ao retângulo.
+2. Calculamos a distância desse ponto mais próximo até o centro do círculo. Se a distância for menor ou igual ao raio, houve colisão!
 
-1. Encontra os pontos limite mais próximos no retângulo (`testX` e `testY`).
-2. Calcula a distância entre `(cx, cy)` e `(testX, testY)`.
-3. Se a distância for menor ou igual ao raio `r`, há colisão!
+<CodeTabs>
 
-### JavaScript (p5.js)
 ```javascript
 function circleRect(cx, cy, radius, rx, ry, rw, rh) {
   let testX = cx;
   let testY = cy;
 
-  // qual borda está mais próxima?
-  if (cx < rx)         testX = rx;      // borda esquerda
-  else if (cx > rx+rw) testX = rx+rw;   // borda direita
+  if (cx < rx)         testX = rx;        // borda esquerda
+  else if (cx > rx+rw) testX = rx+rw;     // borda direita
+  if (cy < ry)         testY = ry;        // borda superior
+  else if (cy > ry+rh) testY = ry+rh;     // borda inferior
 
-  if (cy < ry)         testY = ry;      // borda superior
-  else if (cy > ry+rh) testY = ry+rh;   // borda inferior
-
-  // distância até os pontos mais próximos
   let distX = cx - testX;
   let distY = cy - testY;
   let distance = Math.sqrt((distX * distX) + (distY * distY));
@@ -41,16 +40,15 @@ function circleRect(cx, cy, radius, rx, ry, rw, rh) {
 }
 ```
 
-### Processing (Java)
 ```java
 boolean circleRect(float cx, float cy, float radius, float rx, float ry, float rw, float rh) {
   float testX = cx;
   float testY = cy;
 
-  if (cx < rx)         testX = rx;
-  else if (cx > rx+rw) testX = rx+rw;
-  if (cy < ry)         testY = ry;
-  else if (cy > ry+rh) testY = ry+rh;
+  if (cx < rx)         testX = rx;        // borda esquerda
+  else if (cx > rx+rw) testX = rx+rw;     // borda direita
+  if (cy < ry)         testY = ry;        // borda superior
+  else if (cy > ry+rh) testY = ry+rh;     // borda inferior
 
   float distX = cx-testX;
   float distY = cy-testY;
@@ -62,3 +60,31 @@ boolean circleRect(float cx, float cy, float radius, float rx, float ry, float r
   return false;
 }
 ```
+
+```python
+import math
+
+def circle_rect(cx, cy, radius, rx, ry, rw, rh):
+    test_x = cx
+    test_y = cy
+
+    if cx < rx:
+        test_x = rx
+    elif cx > rx + rw:
+        test_x = rx + rw
+        
+    if cy < ry:
+        test_y = ry
+    elif cy > ry + rh:
+        test_y = ry + rh
+
+    dist_x = cx - test_x
+    dist_y = cy - test_y
+    distance = math.sqrt((dist_x ** 2) + (dist_y ** 2))
+
+    if distance <= radius:
+        return True
+    return False
+```
+
+</CodeTabs>

@@ -3,33 +3,22 @@ title: "Polígono / Polígono"
 slug: "poly-poly"
 order: 22
 sketch: "PolyPoly"
-caption: "Mova o polígono irregular para colidir com o pentágono!"
+caption: "Mova o polígono irregular com o mouse para colidir com o pentágono central!"
 ---
+
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
 
 # POLÍGONO / POLÍGONO
 
-Chegamos à colisão entre dois polígonos genéricos de quaisquer formas e quantidade de vértices!
+Testar se dois polígonos quaisquer estão colidindo é o ápice dos testes com polígonos:
 
-Para testar se o polígono 1 (`p1`) colide com o polígono 2 (`p2`), testamos cada uma das arestas de `p1` contra todo o polígono `p2` utilizando `polyLine(p2, edgeX1, edgeY1, edgeX2, edgeY2)`:
+1. Testamos todas as arestas do Polígono 1 contra o Polígono 2 usando [Polígono/Linha](/poly-line).
+2. Testamos se o Polígono 2 está inteiramente contido dentro do Polígono 1 usando [Polígono/Ponto](/poly-point).
 
-```javascript
-for (let current = 0; current < p1.length; current++) {
-    let next = current + 1;
-    if (next === p1.length) next = 0;
+<CodeTabs>
 
-    let vc = p1[current];
-    let vn = p1[next];
-
-    let collision = polyLine(p2, vc.x, vc.y, vn.x, vn.y);
-    if (collision) return true;
-
-    // testa se o segundo polígono está totalmente contido no primeiro
-    collision = polyPoint(p1, p2[0].x, p2[0].y);
-    if (collision) return true;
-}
-```
-
-### JavaScript (p5.js)
 ```javascript
 function polyPoly(p1, p2) {
   let next = 0;
@@ -43,14 +32,13 @@ function polyPoly(p1, p2) {
     let collision = polyLine(p2, vc.x, vc.y, vn.x, vn.y);
     if (collision) return true;
 
-    let inside = polyPoint(p1, p2[0].x, p2[0].y);
-    if (inside) return true;
+    collision = polyPoint(p1, p2[0].x, p2[0].y);
+    if (collision) return true;
   }
   return false;
 }
 ```
 
-### Processing (Java)
 ```java
 boolean polyPoly(PVector[] p1, PVector[] p2) {
   int next = 0;
@@ -70,3 +58,25 @@ boolean polyPoly(PVector[] p1, PVector[] p2) {
   return false;
 }
 ```
+
+```python
+def poly_poly(p1, p2):
+    next_idx = 0
+    for current in range(len(p1)):
+        next_idx = current + 1
+        if next_idx == len(p1):
+            next_idx = 0
+
+        vc = p1[current]
+        vn = p1[next_idx]
+
+        if poly_line(p2, vc[0], vc[1], vn[0], vn[1]):
+            return True
+
+        if poly_point(p1, p2[0][0], p2[0][1]):
+            return True
+
+    return False
+```
+
+</CodeTabs>

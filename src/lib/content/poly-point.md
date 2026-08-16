@@ -6,6 +6,10 @@ sketch: "PolyPoint"
 caption: "Mova o mouse (ponto) para dentro do polígono!"
 ---
 
+<script>
+	import CodeTabs from '$lib/components/CodeTabs.svelte';
+</script>
+
 # POLÍGONO / PONTO
 
 Para testar se um ponto está dentro de um polígono com qualquer número de vértices, utilizamos o algoritmo de **Ray-Casting** (baseado no *Teorema da Curva de Jordan*).
@@ -15,14 +19,8 @@ Traçamos um raio horizontal imaginário partindo do ponto e indo até o infinit
 - Se cruzar um número **ímpar** de vezes &rarr; o ponto está **DENTRO**.
 - Se cruzar um número **par** de vezes &rarr; o ponto está **FORA**.
 
-```javascript
-if (((vc.y >= py && vn.y < py) || (vc.y < py && vn.y >= py)) &&
-    (px < (vn.x - vc.x) * (py - vc.y) / (vn.y - vc.y) + vc.x)) {
-    collision = !collision;
-}
-```
+<CodeTabs>
 
-### JavaScript (p5.js)
 ```javascript
 function polyPoint(vertices, px, py) {
   let collision = false;
@@ -44,7 +42,6 @@ function polyPoint(vertices, px, py) {
 }
 ```
 
-### Processing (Java)
 ```java
 boolean polyPoint(PVector[] vertices, float px, float py) {
   boolean collision = false;
@@ -65,3 +62,25 @@ boolean polyPoint(PVector[] vertices, float px, float py) {
   return collision;
 }
 ```
+
+```python
+def poly_point(vertices, px, py):
+    collision = False
+    next_idx = 0
+
+    for current in range(len(vertices)):
+        next_idx = current + 1
+        if next_idx == len(vertices):
+            next_idx = 0
+
+        vc = vertices[current]
+        vn = vertices[next_idx]
+
+        if (((vc[1] >= py and vn[1] < py) or (vc[1] < py and vn[1] >= py)) and
+            (px < (vn[0] - vc[0]) * (py - vc[1]) / (vn[1] - vc[1]) + vc[0])):
+            collision = not collision
+
+    return collision
+```
+
+</CodeTabs>
