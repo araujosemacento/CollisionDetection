@@ -128,11 +128,10 @@ export function polyCircle(vertices, cx, cy, r) {
 
 		const vc = vertices[current];
 		const vn = vertices[next];
+
+		const collision = lineCircle(vc.x, vc.y, vn.x, vn.y, cx, cy, r);
+		if (collision) return true;
 	}
-
-	const collision = lineCircle(vc.x, vc.y, vn.x, vn.y, cx, cy, r);
-	if (collision) return true;
-
 	return false;
 }
 
