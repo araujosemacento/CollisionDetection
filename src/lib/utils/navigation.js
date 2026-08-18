@@ -3,7 +3,7 @@ export const chapters = [
 	{ slug: 'table_of_contents', title: 'Sumário', sketch: null },
 	{ slug: 'license', title: 'Licença', sketch: null },
 	{ slug: 'what_you_should_already_know', title: 'O Que Você Já Deve Saber', sketch: null },
-	{ slug: 'ai_usage', title: 'Uso de Inteligência Artificial', sketch: null },
+	{ slug: 'ai_usage', title: 'Autoria & Uso de Inteligência Artificial', sketch: null },
 	{ slug: 'point-point', title: 'Ponto / Ponto', sketch: 'PointPoint' },
 	{ slug: 'point-circle', title: 'Ponto / Círculo', sketch: 'PointCircle' },
 	{ slug: 'circle-circle', title: 'Círculo / Círculo', sketch: 'CircleCircle' },
@@ -27,6 +27,7 @@ export const chapters = [
 	{ slug: 'where_are_the_other_triangle_examples', title: 'Outros Exemplos de Triângulo', sketch: null },
 	{ slug: 'section_5_challenges', title: 'Desafios: Seção 5', sketch: null },
 	{ slug: 'object_oriented_collision', title: 'Colisão Orientada a Objetos', sketch: 'ObjectOrientedCollision' },
+	{ slug: 'matrix_transformations', title: 'Transformações de Matrizes', sketch: 'MatrixTransformations' },
 	{ slug: 'thanks', title: 'Agradecimentos', sketch: null }
 ];
 

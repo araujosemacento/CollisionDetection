@@ -1,11 +1,11 @@
 ---
-title: "Uso de Inteligência Artificial"
+title: "Autoria & Uso de Inteligência Artificial"
 slug: "ai_usage"
 order: 5
 sketch: null
 ---
 
-# USO DE INTELIGÊNCIA ARTIFICIAL
+# AUTORIA & USO DE INTELIGÊNCIA ARTIFICIAL
 
 Esta edição modificada e traduzida do livro **Collision Detection** foi desenvolvida com o auxílio de ferramentas de **Inteligência Artificial (Antigravity AI / Google DeepMind)** trabalhando em regime de *pair programming*.
 

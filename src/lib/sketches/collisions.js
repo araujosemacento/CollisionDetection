@@ -128,10 +128,11 @@ export function polyCircle(vertices, cx, cy, r) {
 
 		const vc = vertices[current];
 		const vn = vertices[next];
-
-		const collision = lineCircle(vc.x, vc.y, vn.x, vn.y, cx, cy, r);
-		if (collision) return true;
 	}
+
+	const collision = lineCircle(vc.x, vc.y, vn.x, vn.y, cx, cy, r);
+	if (collision) return true;
+
 	return false;
 }
 
@@ -146,10 +147,11 @@ export function polyRect(rx, ry, rw, rh, vertices) {
 
 		const collision = lineRect(vc.x, vc.y, vn.x, vn.y, rx, ry, rw, rh);
 		if (collision) return true;
-
-		const inside = polyPoint(vertices, rx, ry);
-		if (inside) return true;
 	}
+
+	const inside = polyPoint(vertices, rx, ry);
+	if (inside) return true;
+
 	return false;
 }
 
@@ -181,10 +183,16 @@ export function polyPoly(p1, p2) {
 
 		const collision = polyLine(p2, vc.x, vc.y, vn.x, vn.y);
 		if (collision) return true;
-
-		const inside = polyPoint(p1, p2[0].x, p2[0].y);
-		if (inside) return true;
 	}
+
+	// 1. Testa se o Polígono 2 está totalmente DENTRO do Polígono 1
+	const inside1 = polyPoint(p1, p2[0].x, p2[0].y);
+	if (inside1) return true;
+
+	// 2. Testa se o Polígono 1 está totalmente DENTRO do Polígono 2
+	const inside2 = polyPoint(p2, p1[0].x, p1[0].y);
+	if (inside2) return true;
+
 	return false;
 }
 

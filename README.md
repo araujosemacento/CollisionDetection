@@ -33,7 +33,7 @@ Este repositório é uma adaptação e tradução comunitária mantida para fins
 
 ---
 
-#### USO DE INTELIGÊNCIA ARTIFICIAL (IA)
+#### AUTORIA & USO DE INTELIGÊNCIA ARTIFICIAL (IA)
 
 Esta versão foi reestruturada, traduzida e modernizada através de _pair programming_ com **Antigravity AI (Google DeepMind)**.
 

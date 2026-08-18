@@ -832,3 +832,127 @@ export const ObjectOrientedCollision = (container) => (p) => {
 		circle.display();
 	};
 };
+
+export const MatrixTransformations = (container) => (p) => {
+	let square1 = [];
+	let square2 = [];
+	let angle = 0;
+	let s1x, s1y;
+	let isDragging = false;
+	let dragOffsetX = 0;
+	let dragOffsetY = 0;
+	let square1Screen = [];
+
+	p.setup = () => {
+		const w = getCanvasWidth(container);
+		p.createCanvas(w, 400);
+
+		const scaleFactor = w / 600;
+		const r1 = 50 * scaleFactor;
+		const r2 = 100 * scaleFactor;
+
+		square1 = [
+			{ x: -r1, y: -r1 },
+			{ x: r1, y: -r1 },
+			{ x: r1, y: r1 },
+			{ x: -r1, y: r1 }
+		];
+
+		square2 = [
+			{ x: -r2, y: -r2 },
+			{ x: r2, y: -r2 },
+			{ x: r2, y: r2 },
+			{ x: -r2, y: r2 }
+		];
+
+		s1x = p.width / 3;
+		s1y = p.height / 2;
+	};
+
+	p.mousePressed = () => {
+		if (col.polyPoint(square1Screen, p.mouseX, p.mouseY)) {
+			isDragging = true;
+			dragOffsetX = s1x - p.mouseX;
+			dragOffsetY = s1y - p.mouseY;
+		}
+	};
+
+	p.mouseDragged = () => {
+		if (isDragging) {
+			s1x = p.mouseX + dragOffsetX;
+			s1y = p.mouseY + dragOffsetY;
+		}
+	};
+
+	p.mouseReleased = () => {
+		isDragging = false;
+	};
+
+	p.draw = () => {
+		p.background(255);
+
+		// atualiza o ângulo de rotação
+		angle += 0.02;
+
+		// Posição fixa do segundo quadrado (azul/laranja)
+		const s2x = p.width - p.width / 3;
+		const s2y = p.height / 2;
+
+		// Converte os pontos para coordenadas reais de tela e testa a colisão
+		square1Screen = pointsToScreenCoords(square1, s1x, s1y, angle);
+		const square2Screen = pointsToScreenCoords(square2, s2x, s2y, angle);
+		const hit = col.polyPoly(square1Screen, square2Screen);
+
+		// 1. Desenha o segundo quadrado (alvo fixo) PRIMEIRO
+		p.push();
+		p.translate(s2x, s2y);
+		p.rotate(angle);
+		p.fill(hit ? [255, 150, 0] : [0, 150, 255]);
+		p.noStroke();
+		p.beginShape();
+		for (let pt of square2) {
+			p.vertex(pt.x, pt.y);
+		}
+		p.endShape(p.CLOSE);
+		p.pop();
+
+		// 2. Desenha o primeiro quadrado (cinza interativo) SEGUNDO para efeito semitransparente por cima
+		p.push();
+		p.translate(s1x, s1y);
+		p.rotate(angle);
+		p.fill(0, 150);
+		p.noStroke();
+		p.beginShape();
+		for (let pt of square1) {
+			p.vertex(pt.x, pt.y);
+		}
+		p.endShape(p.CLOSE);
+		p.pop();
+
+		// Cursor visual ao passar o mouse ou arrastar o quadrado menor
+		const hovering = col.polyPoint(square1Screen, p.mouseX, p.mouseY);
+		if (isDragging) {
+			p.cursor('grabbing');
+		} else if (hovering) {
+			p.cursor('grab');
+		} else {
+			p.cursor(p.ARROW);
+		}
+	};
+
+	function pointsToScreenCoords(points, tx, ty, rotAngle) {
+		const cosA = Math.cos(rotAngle);
+		const sinA = Math.sin(rotAngle);
+		return points.map((pt) => ({
+			x: tx + pt.x * cosA - pt.y * sinA,
+			y: ty + pt.x * sinA + pt.y * cosA
+		}));
+	}
+};
+
+
+
+
+
+
+

@@ -83,8 +83,13 @@ h3 {
 	margin: 1.5rem 0 0.75rem 0;
 }
 
+h4 {
+	font-weight: 400;
+}
+
 p {
 	margin: 0 0 1.25rem 0;
+	text-align: justify;
 }
 
 a {
@@ -100,6 +105,13 @@ a:hover {
 	color: var(--color-primary);
 }
 
+/* Footer */
+
+footer {
+	display: flexbox;
+	justify-items: center;
+}
+
 /* Callout Box */
 .callout {
 	background-color: var(--color-callout-bg);
@@ -108,6 +120,7 @@ a:hover {
 	margin: 1.5rem 0;
 	border-radius: 6px;
 	font-size: 0.95rem;
+	text-align: justify;
 	line-height: 1.5;
 }
 
@@ -223,6 +236,7 @@ main img {
 }
 
 @media (prefers-color-scheme: dark) {
+
 	.chapter-body img,
 	main img {
 		background-color: #ffffff;
@@ -234,6 +248,7 @@ main img {
 
 /* Responsividade Mobile */
 @media (max-width: 640px) {
+
 	html,
 	body {
 		font-size: 17px;
@@ -265,4 +280,3 @@ main img {
 		border-radius: 6px;
 	}
 }
-

@@ -49,14 +49,17 @@ let collision = polyLine(p2, vc.x, vc.y, vn.x, vn.y);
 if (collision) return true;
 ```
 
-### 3. O "Edge Case": Polígono Inteiramente DENTRO do Outro
-Assim como nos capítulos anteriores, pode acontecer de o Polígono 2 estar **totalmente dentro** do Polígono 1 sem que nenhuma de suas arestas se cruze nas bordas.
+### 3. O "Edge Case": Um Polígono Inteiramente DENTRO do Outro
+Assim como nos capítulos anteriores, pode acontecer de um dos polígonos estar **totalmente dentro** do outro sem que nenhuma de suas arestas se cruze nas bordas.
 
-Para detectar isso, fazemos uma verificação rápida testando se o primeiro vértice do Polígono 2 (`p2[0]`) está contido dentro do Polígono 1 usando a função [Polígono/Ponto](poly-point):
+Para detectar essa situação em qualquer direção, fazemos uma verificação rápida testando se o primeiro vértice do Polígono 2 (`p2[0]`) está dentro do Polígono 1 ou se o primeiro vértice do Polígono 1 (`p1[0]`) está dentro do Polígono 2 usando a função [Polígono/Ponto](poly-point):
 
 ```javascript
-collision = polyPoint(p1, p2[0].x, p2[0].y);
-if (collision) return true;
+let inside1 = polyPoint(p1, p2[0].x, p2[0].y);
+if (inside1) return true;
+
+let inside2 = polyPoint(p2, p1[0].x, p1[0].y);
+if (inside2) return true;
 ```
 
 ---
@@ -67,7 +70,7 @@ if (collision) return true;
 
 ```javascript
 function polyPoly(p1, p2) {
-  // percorre os vértices do Polígono 1 para formar cada aresta
+  // 1. Compara cada aresta do Polígono 1 contra todas as arestas do Polígono 2
   let next = 0;
   for (let current = 0; current < p1.length; current++) {
     next = current + 1;
@@ -76,14 +79,16 @@ function polyPoly(p1, p2) {
     let vc = p1[current];
     let vn = p1[next];
 
-    // 1. Compara cada aresta do Polígono 1 contra todas as arestas do Polígono 2
     let collision = polyLine(p2, vc.x, vc.y, vn.x, vn.y);
     if (collision) return true;
-
-    // 2. OPCIONAL: testa se o Polígono 2 está inteiramente DENTRO do Polígono 1
-    collision = polyPoint(p1, p2[0].x, p2[0].y);
-    if (collision) return true;
   }
+
+  // 2. OPCIONAL: testa se um polígono está totalmente DENTRO do outro (ambas as direções)
+  let inside1 = polyPoint(p1, p2[0].x, p2[0].y);
+  if (inside1) return true;
+
+  let inside2 = polyPoint(p2, p1[0].x, p1[0].y);
+  if (inside2) return true;
 
   return false;
 }
@@ -91,7 +96,7 @@ function polyPoly(p1, p2) {
 
 ```java
 boolean polyPoly(PVector[] p1, PVector[] p2) {
-  // percorre os vértices do Polígono 1 para formar cada aresta
+  // 1. Compara cada aresta do Polígono 1 contra todas as arestas do Polígono 2
   int next = 0;
   for (int current=0; current<p1.length; current++) {
     next = current+1;
@@ -100,14 +105,16 @@ boolean polyPoly(PVector[] p1, PVector[] p2) {
     PVector vc = p1[current];
     PVector vn = p1[next];
 
-    // 1. Compara cada aresta do Polígono 1 contra todas as arestas do Polígono 2
     boolean collision = polyLine(p2, vc.x,vc.y,vn.x,vn.y);
     if (collision) return true;
-
-    // 2. OPCIONAL: testa se o Polígono 2 está inteiramente DENTRO do Polígono 1
-    collision = polyPoint(p1, p2[0].x, p2[0].y);
-    if (collision) return true;
   }
+
+  // 2. OPCIONAL: testa se um polígono está totalmente DENTRO do outro (ambas as direções)
+  boolean inside1 = polyPoint(p1, p2[0].x, p2[0].y);
+  if (inside1) return true;
+
+  boolean inside2 = polyPoint(p2, p1[0].x, p1[0].y);
+  if (inside2) return true;
 
   return false;
 }
@@ -115,7 +122,7 @@ boolean polyPoly(PVector[] p1, PVector[] p2) {
 
 ```python
 def poly_poly(p1, p2):
-    # percorre os vértices do Polígono 1 para formar cada aresta
+    # 1. Compara cada aresta do Polígono 1 contra todas as arestas do Polígono 2
     next_idx = 0
     for current in range(len(p1)):
         next_idx = current + 1
@@ -125,13 +132,15 @@ def poly_poly(p1, p2):
         vc = p1[current]
         vn = p1[next_idx]
 
-        # 1. Compara cada aresta do Polígono 1 contra todas as arestas do Polígono 2
         if poly_line(p2, vc[0], vc[1], vn[0], vn[1]):
             return True
 
-        # 2. OPCIONAL: testa se o Polígono 2 está inteiramente DENTRO do Polígono 1
-        if poly_point(p1, p2[0][0], p2[0][1]):
-            return True
+    # 2. OPCIONAL: testa se um polígono está totalmente DENTRO do outro (ambas as direções)
+    if poly_point(p1, p2[0][0], p2[0][1]):
+        return True
+
+    if poly_point(p2, p1[0][0], p1[0][1]):
+        return True
 
     return False
 ```

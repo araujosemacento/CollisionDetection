@@ -9,6 +9,6 @@ sketch: null
 	import TableOfContents from '$lib/components/TableOfContents.svelte';
 </script>
 
-![Formas geométricas básicas](images/table-of-contents.jpg)
+![Ponto, círculo, retângulo, linha, triângulo e polígono](images/table-of-contents.jpg)
 
 <TableOfContents />
