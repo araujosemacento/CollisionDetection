@@ -12,8 +12,6 @@ caption: "Mova o mouse (ponto) para dentro do círculo para testar a colisão!"
 
 # PONTO / CÍRCULO
 
-#### Jeff Thompson
-
 A colisão [Ponto/Ponto](point-point) foi extremamente fácil, mas a partir de agora precisaremos de matemática básica para verificar se os objetos estão se tocando. Testar se um ponto está dentro de um círculo exige relembrar o famoso **Teorema de Pitágoras**:
 
 ```text
@@ -22,9 +20,21 @@ a² + b² = c²
 
 Podemos calcular o comprimento do lado mais longo de um triângulo retângulo (a hipotenusa **c**) dados os comprimentos dos outros dois lados (**a** e **b**):
 
+<CodeTabs>
+
 ```javascript
-c = Math.sqrt((a * a) + (b * b));
+c = Math.sqrt(a * a + b * b);
 ```
+
+```java
+c = sqrt((a * a) + (b * b));
+```
+
+```python
+c = math.sqrt((a * a) + (b * b))
+```
+
+</CodeTabs>
 
 Multiplicamos `a` por ele mesmo, o mesmo para `b`, somamos os dois resultados e tiramos a raiz quadrada do total.
 
@@ -34,38 +44,61 @@ Por que precisamos disso? O Teorema de Pitágoras nos dá a **distância exata e
 
 Calculamos as distâncias X e Y:
 
+<CodeTabs>
+
 ```javascript
 let distX = px - cx;
 let distY = py - cy;
 ```
 
+```java
+float distX = px - cx;
+float distY = py - cy;
+```
+
+```python
+dist_x = px - cx
+dist_y = py - cy
+```
+
+</CodeTabs>
+
 Em seguida, encontramos a distância entre o ponto e o centro do círculo usando a fórmula:
 
+<CodeTabs>
+
 ```javascript
-let distance = Math.sqrt((distX * distX) + (distY * distY));
+let distance = Math.sqrt(distX * distX + distY * distY);
 ```
+
+```java
+float distance = sqrt((distX * distX) + (distY * distY));
+```
+
+```python
+distance = math.sqrt((dist_x ** 2) + (dist_y ** 2))
+```
+
+</CodeTabs>
 
 Por exemplo, se o ponto está na coordenada `(10, 10)` e o centro do círculo está em `(40, 50)`, obtemos uma distância exata de `50`.
 
-Você pode estar se perguntando: *"E se a diferença das distâncias resultar em um número negativo?"* Não se preocupe: como multiplicamos cada valor por ele mesmo (`distX * distX`), mesmo se o resultado da subtração for negativo, a multiplicação tornará o resultado positivo!
+Você pode estar se perguntando: _"E se a diferença das distâncias resultar em um número negativo?"_ Não se preocupe: como multiplicamos cada valor por ele mesmo (`distX * distX`), mesmo se o resultado da subtração for negativo, a multiplicação tornará o resultado positivo!
 
----
-
-## COMO TESTAR A COLISÃO?
-
-Se a distância calculada entre o ponto e o centro do círculo for **menor ou igual ao raio (r)** do círculo, significa que o ponto está dentro dele!
+Certo, mas como usamos isso para testar a colisão? Se a distância entre o ponto e o centro do círculo for **menor ou igual ao raio (r)** do círculo, significa que eles estão colidindo!
 
 <CodeTabs>
 
 ```javascript
 function pointCircle(px, py, cx, cy, r) {
-  // calcula a distância entre o ponto e o centro do círculo
+  // Obtém a distância entre o ponto e o centro do círculo
   // usando o Teorema de Pitágoras
   let distX = px - cx;
   let distY = py - cy;
-  let distance = Math.sqrt((distX * distX) + (distY * distY));
+  let distance = Math.sqrt(distX * distX + distY * distY);
 
-  // se a distância for menor ou igual ao raio, há colisão!
+  // Se a distância for menor ou igual ao raio do círculo,
+  // o ponto está dentro!
   if (distance <= r) {
     return true;
   }
@@ -75,13 +108,14 @@ function pointCircle(px, py, cx, cy, r) {
 
 ```java
 boolean pointCircle(float px, float py, float cx, float cy, float r) {
-  // calcula a distância entre o ponto e o centro do círculo
+  // Obtém a distância entre o ponto e o centro do círculo
   // usando o Teorema de Pitágoras
   float distX = px - cx;
   float distY = py - cy;
-  float distance = sqrt( (distX*distX) + (distY*distY) );
+  float distance = sqrt((distX * distX) + (distY * distY));
 
-  // se a distância for menor ou igual ao raio, há colisão!
+  // Se a distância for menor ou igual ao raio do círculo,
+  // o ponto está dentro!
   if (distance <= r) {
     return true;
   }
@@ -93,13 +127,14 @@ boolean pointCircle(float px, float py, float cx, float cy, float r) {
 import math
 
 def point_circle(px, py, cx, cy, r):
-    # calcula a distância entre o ponto e o centro do círculo
+    # Obtém a distância entre o ponto e o centro do círculo
     # usando o Teorema de Pitágoras
     dist_x = px - cx
     dist_y = py - cy
     distance = math.sqrt((dist_x ** 2) + (dist_y ** 2))
 
-    # se a distância for menor ou igual ao raio, há colisão!
+    # Se a distância for menor ou igual ao raio do círculo,
+    # o ponto está dentro!
     if distance <= r:
         return True
     return False
@@ -112,13 +147,214 @@ def point_circle(px, py, cx, cy, r):
 
 </CodeTabs>
 
-> **Nota didática:** Muitas linguagens de programação possuem funções utilitárias nativas para calcular a distância diretamente (como `dist()` no Processing ou `Math.hypot()` em JavaScript). No entanto, mantemos a matemática explícita no código para servir de referência conceitual.
+Utilizado em um exemplo completo, podemos alterar a cor do círculo se o ponto estiver dentro dele.
+
+<CodeTabs>
+
+```javascript
+// Coordenadas X e Y do mouse
+let px, py;
+
+// Coordenadas X e Y do centro do círculo
+// e o valor do raio
+let cx, cy, r;
+
+function setup() {
+  createCanvas(600, 400);
+  noCursor();
+
+  strokeWeight(15);
+
+  // Define a posição inicial e o raio do círculo
+  cx = width / 2;
+  cy = height / 2;
+  r = 100;
+}
+
+function draw() {
+  background(255);
+
+  // Atualiza a posição do mouse
+  px = mouseX;
+  py = mouseY;
+
+  // ------------------------------------------------
+  // Verifica se há colisão entre o ponto e o círculo
+  let colidindo = pointCircle(px, py, cx, cy, r);
+
+  if (colidindo) {
+    fill(255, 150, 0);
+  } else {
+    fill(0, 150, 255);
+  }
+  // ------------------------------------------------
+
+  // Desenha o círculo
+  noStroke();
+  circle(cx, cy, r * 2);
+
+  // Desenha o ponto
+  stroke(0, 150);
+  point(px, py);
+}
+
+function pointCircle(px, py, cx, cy, r) {
+  // Obtém a distância entre o ponto e o centro do círculo
+  // usando o Teorema de Pitágoras
+  let distX = px - cx;
+  let distY = py - cy;
+  let distancia = Math.sqrt(distX * distX + distY * distY);
+
+  // Se a distância for menor ou igual ao raio do círculo,
+  // o ponto está dentro!
+  if (distancia <= r) {
+    return true;
+  }
+  return false;
+}
+```
+
+```java
+// Coordenadas X e Y do mouse
+float px, py;
+
+// Coordenadas X e Y do centro do círculo
+// e o valor do raio
+float cx, cy, r;
+
+void setup() {
+  size(600, 400);
+  noCursor();
+
+  strokeWeight(15);
+
+  // Define a posição inicial e o raio do círculo
+  cx = width / 2;
+  cy = height / 2;
+  r = 100;
+}
+
+void draw() {
+  background(255);
+
+  // Atualiza a posição do mouse
+  px = mouseX;
+  py = mouseY;
+
+  // ------------------------------------------------
+  // Verifica se há colisão entre o ponto e o círculo
+  boolean colidindo = pointCircle(px, py, cx, cy, r);
+
+  if (colidindo) {
+    fill(255, 150, 0);
+  }
+  else {
+    fill(0, 150, 255);
+  }
+  // ------------------------------------------------
+
+  // Desenha o círculo
+  noStroke();
+  ellipse(cx, cy, r * 2, r * 2);
+
+  // Desenha o ponto
+  stroke(0, 150);
+  strokeWeight(15);
+  point(px, py);
+}
+
+boolean pointCircle(float px, float py, float cx, float cy, float r) {
+  // Obtém a distância entre o ponto e o centro do círculo
+  // usando o Teorema de Pitágoras
+  float distX = px - cx;
+  float distY = py - cy;
+  float distancia = sqrt((distX * distX) + (distY * distY));
+
+  // Se a distância for menor ou igual ao raio do círculo,
+  // o ponto está dentro!
+  if (distancia <= r) {
+    return true;
+  }
+  return false;
+}
+```
+
+```python
+import pygame
+from math import sqrt
+pygame.init()
+
+LARGURA, ALTURA = 600, 400
+tela = pygame.display.set_mode((LARGURA, ALTURA))
+pygame.display.set_caption("Ponto / Círculo")
+pygame.mouse.set_visible(False)
+
+# Coordenadas X e Y do centro do círculo
+# e o valor do raio
+cx = LARGURA // 2
+cy = ALTURA // 2
+r = 100
+
+def point_circle(x1, y1, x2, y2, r):
+    # Obtém a distância entre o ponto e o centro do círculo
+    # usando o Teorema de Pitágoras
+    dist_x = x1 - x2
+    dist_y = y1 - y2
+    distance = sqrt((dist_x ** 2) + (dist_y ** 2))
+
+    # Se a distância for menor ou igual ao raio do círculo,
+    # o ponto está dentro!
+    if distance <= r:
+        return True
+    return False
+
+relogio = pygame.time.Clock()
+rodando = True
+
+while rodando:
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            rodando = False
+
+    tela.fill((255, 255, 255))
+
+    # Atualiza a posição do mouse
+    px, py = pygame.mouse.get_pos()
+
+    # ------------------------------------------------
+    # Verifica se há colisão entre o ponto e o círculo
+    colidindo = point_circle(px, py, cx, cy, r)
+
+    if colidindo:
+        cor = (255, 150, 0)
+    else:
+        cor = (0, 150, 255)
+    # ------------------------------------------------
+
+    # Desenha o círculo
+    pygame.draw.circle(tela, cor, (cx, cy), r)
+
+    # Desenha o ponto
+    pygame.draw.circle(tela, (0, 0, 0), (px, py), 7)
+
+    pygame.display.flip()
+    relogio.tick(60)
+
+pygame.quit()
+```
+
+</CodeTabs>
+
+Este método, utilizando o Teorema de Pitágoras, retornará muitas vezes ao longo dos próximos capítulos. Linguagens e motores gráficos frequentemente possuem funções utilitárias integradas para calcular distâncias (como a função `dist()` no Processing/p5.js, `Math.hypot()` em JavaScript, ou o método `distance_to()` da classe Vector2 no Pygame), caso prefira utilizá-las. Apesar disso, manteremos a matemática explícita em nossos exemplos como referência didática.
 
 ---
 
 ## O PROBLEMA DA "BALA ATRAVÉS DO PAPEL" (CCD)
 
-Uma ressalva importante: se você tiver um objeto movendo-se a altíssima velocidade em um jogo (como um projétil ou tiro), ele pode atravessar completamente o alvo entre um quadro (*frame*) e outro sem que a colisão seja detectada no instante exato do teste!
+Uma ressalva importante: se você tiver um objeto movendo-se a altíssima velocidade em um jogo (como um projétil ou tiro), ele pode às vezes atravessar completamente o alvo sem que a colisão seja acionada!
 
-Esse fenômeno é conhecido no desenvolvimento de jogos como o problema da *"bala através do papel"* (*bullet through paper*). A técnica avançada padrão para solucionar isso é chamada de **Continuous Collision Detection (CCD)** (Detecção de Colisão Contínua), que projeta trajetórias ao longo do tempo em vez de apenas verificar posições discretas a cada frame.
+Esse fenômeno é comumente referido como o problema da _"bala através do papel"_ (_bullet through paper_). Existem diversas soluções para essa questão, e um ótimo ponto de partida é [esta postagem no GameDev.net](http://gamedev.stackexchange.com/questions/22765/how-do-i-check-collision-when-firing-bullet). A técnica padrão da indústria para solucionar esse comportamento é chamada de [Continuous Collision Detection (CCD)](http://en.wikipedia.org/wiki/Collision_detection#A_posteriori_.28discrete.29_versus_a_priori_.28continuous.29) (Detecção de Colisão Contínua).
 
+<div class="callout">
+Peço desculpas, mas não achei referências de fácil compreensão em português sobre esse tema, então optei por simplesmente deixar as referências originais.
+</div>
