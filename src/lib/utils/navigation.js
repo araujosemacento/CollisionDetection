@@ -2,7 +2,7 @@ export const chapters = [
 	{ slug: 'index', title: 'Introdução', sketch: 'Introduction' },
 	{ slug: 'table_of_contents', title: 'Sumário', sketch: null },
 	{ slug: 'license', title: 'Licença', sketch: null },
-	{ slug: 'what_you_should_already_know', title: 'O Que Você Já Deve Saber', sketch: null },
+	{ slug: 'what_you_should_already_know', title: 'O Que Você Precisa Saber', sketch: null },
 	{ slug: 'ai_usage', title: 'Autoria & Uso de Inteligência Artificial', sketch: null },
 	{ slug: 'point-point', title: 'Ponto / Ponto', sketch: 'PointPoint' },
 	{ slug: 'point-circle', title: 'Ponto / Círculo', sketch: 'PointCircle' },

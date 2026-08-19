@@ -45,6 +45,7 @@ body {
 	font-family: var(--font-body);
 	font-size: 19px;
 	line-height: 1.6;
+	scroll-behavior: smooth;
 }
 
 #wrapper {
@@ -64,6 +65,7 @@ h4 {
 	color: var(--color-text);
 	text-align: center;
 	line-height: 1.2;
+	scroll-margin-top: 2rem;
 }
 
 h1 {
@@ -217,6 +219,7 @@ ul,
 ol {
 	margin: 0 0 1.5rem 1.5rem;
 	padding: 0;
+	text-align: justify;
 }
 
 li {

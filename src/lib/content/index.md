@@ -15,7 +15,7 @@ A colisão entre objetos é a base de grande parte das experiências em jogos e 
 Este livro explica os algoritmos por trás dessas colisões utilizando formas geométricas básicas como círculos, retângulos e linhas, para que você possa implementá-los em seus próprios projetos.
 
 <div class="callout">
-<strong>ATUALIZAÇÃO:</strong> Este site foi atualizado e traduzido para o Português (PT-BR), com suporte a dispositivos móveis e renderização interativa em <code>p5.js</code>. O conteúdo aqui exposto não é de minha autoria, todos os créditos referentes ao conteúdo original do livro podem ser encontrados na seção de <a href = thanks>Agradecimentos</a>.
+<strong>ATUALIZAÇÃO:</strong> Este site foi atualizado e traduzido para o português (PT-BR), com suporte a dispositivos móveis e renderização interativa em <code>p5.js</code>. O conteúdo aqui exposto não é de minha autoria, todos os créditos referentes ao conteúdo original do livro podem ser encontrados na seção de <a href = thanks>Agradecimentos</a>.
 </div>
 
 Pronto para começar? Vá direto para o [Sumário do Livro](table_of_contents)...
@@ -24,10 +24,10 @@ Pronto para começar? Vá direto para o [Sumário do Livro](table_of_contents)..
 
 Este livro cobre colisões entre pontos, círculos, retângulos, linhas, polígonos e triângulos. Esses exemplos foram projetados para serem o mais legíveis e compreensíveis possível. Existem certamente métodos mais rápidos e eficientes para detectar tais colisões, mas a intenção deste livro é ser amigável e ensinar os princípios com o mínimo de matemática necessária.
 
-Cada seção inclui a explicação do algoritmo de colisão e um exemplo interativo construído com **p5.js**. Você pode acessar o código original no [repositório do autor](https://github.com/jeffThompson/CollisionDetection), assim como as adaptações realizadas para esta versão disponibilizadas na íntegra ao fim de cada capítulo.
+Cada seção inclui a explicação do algoritmo de colisão e um exemplo interativo construído com **p5.js**. Você pode acessar o código original no [repositório do autor](https://github.com/jeffThompson/CollisionDetection), assim como as adaptações realizadas para esta versão, disponibilizadas na íntegra ao fim de cada capítulo.
 
 <div class="callout">
-<strong>NOTA:</strong> Os exemplos interativos foram projetados primordialmente para uso com mouse no computador, mas não devem apresentar problemas de funcionamento em dispositivos móveis. Caso sinta-se frustrado com a experiência em telas sensíveis ao toque, tente acessar o site em um computador desktop.
+<strong>NOTA:</strong> Os exemplos interativos foram projetados primordialmente para uso com mouse no computador, mas não devem apresentar problemas de funcionamento em dispositivos móveis. Caso se sinta frustrado com a experiência em telas sensíveis ao toque, tente acessar o site em um computador desktop.
 </div>
 
 ## O QUE NÃO É COBERTO?

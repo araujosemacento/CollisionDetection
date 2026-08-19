@@ -42,7 +42,7 @@
   <h1>SUMÁRIO DO LIVRO</h1>
   <p class="intro">
     Você pode voltar a esta página a qualquer momento clicando no link do topo
-    da página. Selecionando um capítulo abaixo navegue pelas explicações e
+    da página. Selecionando um capítulo abaixo, navegue pelas explicações e
     demonstrações interativas.
   </p>
 

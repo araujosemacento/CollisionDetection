@@ -75,7 +75,7 @@ bun run build
 
 #### IMPLANTAÇÃO AUTOMÁTICA (GITHUB PAGES)
 
-O repositório inclui um workflow de **GitHub Actions** em [`.github/workflows/deploy.yml`](file:///.github/workflows/deploy.yml) para compilar e implantar o site no **GitHub Pages** a cada `push` na branch `main`.
+O repositório inclui um workflow de **GitHub Actions** em [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) para compilar e implantar o site no **GitHub Pages** a cada `push` na branch `main`.
 
 ##### Como Ativar no GitHub:
 
