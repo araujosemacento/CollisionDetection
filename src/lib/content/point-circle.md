@@ -68,15 +68,15 @@ Em seguida, encontramos a distância entre o ponto e o centro do círculo usando
 <CodeTabs>
 
 ```javascript
-let distance = Math.sqrt(distX * distX + distY * distY);
+let distancia = Math.sqrt(distX * distX + distY * distY);
 ```
 
 ```java
-float distance = sqrt((distX * distX) + (distY * distY));
+float distancia = sqrt((distX * distX) + (distY * distY));
 ```
 
 ```python
-distance = math.sqrt((dist_x ** 2) + (dist_y ** 2))
+distancia = math.sqrt((dist_x ** 2) + (dist_y ** 2))
 ```
 
 </CodeTabs>
@@ -95,11 +95,11 @@ function pointCircle(px, py, cx, cy, r) {
   // usando o Teorema de Pitágoras
   let distX = px - cx;
   let distY = py - cy;
-  let distance = Math.sqrt(distX * distX + distY * distY);
+  let distancia = Math.sqrt(distX * distX + distY * distY);
 
   // Se a distância for menor ou igual ao raio do círculo,
   // o ponto está dentro!
-  if (distance <= r) {
+  if (distancia <= r) {
     return true;
   }
   return false;
@@ -112,11 +112,11 @@ boolean pointCircle(float px, float py, float cx, float cy, float r) {
   // usando o Teorema de Pitágoras
   float distX = px - cx;
   float distY = py - cy;
-  float distance = sqrt((distX * distX) + (distY * distY));
+  float distancia = sqrt((distX * distX) + (distY * distY));
 
   // Se a distância for menor ou igual ao raio do círculo,
   // o ponto está dentro!
-  if (distance <= r) {
+  if (distancia <= r) {
     return true;
   }
   return false;
@@ -131,11 +131,11 @@ def point_circle(px, py, cx, cy, r):
     # usando o Teorema de Pitágoras
     dist_x = px - cx
     dist_y = py - cy
-    distance = math.sqrt((dist_x ** 2) + (dist_y ** 2))
+    distancia = math.sqrt((dist_x ** 2) + (dist_y ** 2))
 
     # Se a distância for menor ou igual ao raio do círculo,
     # o ponto está dentro!
-    if distance <= r:
+    if distancia <= r:
         return True
     return False
 
